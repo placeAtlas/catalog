@@ -278,21 +278,97 @@ const variationsConfig = {
 			{ timestamp: 1652140583, url: "./_img/canvas/tfc-uc/1652140583877_final_1.png" },
 			{ timestamp: "Final", url: "./_img/canvas/tfc-uc/1652141667878_final_2.png" },
 		]
-	}
-	// },
-	// ns: {
-	// 	name: "Streamerless",
-	// 	code: "NS",
-	// 	default: 0,
-	// 	drawablePeriods: [0, 0],
-	// 	versions: [
-	// 		{
-	// 			timestamp: "Streamerless",
-	// 			url: "./_img/canvas/streamerless/streamerless.png",
-	// 		},
-	// 	],
-	// 	icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192"><path d="M-.07,0V192H191.93V38h-38V117.2l-28.5,28.8h-29.6l-24.89,25.2v-25.2H38.93V38h115V0H-.07Z"/><path d="M72.56,73.7l-7.64,7.64,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.63-7.64-7.87-7.87,7.87-7.87-7.63-7.64-7.87,7.87-7.87-7.87Z"/><path d="M137.39,73.7l-7.87,7.87-7.87-7.87-7.63,7.63,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.64-7.64-7.87-7.87,7.87-7.87-7.64-7.64Z"/></svg>'
-	// }
+	},
+	"redditor-cut-scaevolus": {
+		name: "Last Averages (u/scaevolus)",
+		code: "R1",
+		default: 0,
+		versions: [
+			{ timestamp: "Last Hour Average", url: "./_img/canvas/redditor-cuts/hour-average-scaevolus.png"},
+			{ timestamp: "Last 5-Minute Average", url: "./_img/canvas/redditor-cuts/5-min-average-scaevolus.png"}
+		]
+	},
+	"redditor-cut-davidxga": {
+		name: "Last Hour Median (u/DavidXGA)",
+		code: "R2",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/hour-median-davidxga.png"}
+		]
+	},
+	"redditor-cut-dankrudesandstorm": {
+		name: "u/DankRudeSandstorm Cut",
+		code: "R3",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/dankrudesandstorm-cut.png"}
+		]
+	},
+	"redditor-cut-tiktaalik414": {
+		name: "u/Tiktaalik414 Cut",
+		code: "R4",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/tiktaalik414-cut.png"}
+		]
+	},
+	"redditor-cut-poisonsnow": {
+		name: "u/PoisonSnow Cut",
+		code: "R5",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/poisonsnow-cut.png"}
+		]
+	},
+	"visualization-alpaca_fur": {
+		name: "Whole Average (u/alpaca_fur)",
+		code: "V1",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-alpaca_fur.png"}
+		]
+	},
+	"visualization-rwbaker16": {
+		name: "Whole Average (u/Rwbaker16)",
+		code: "V2",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-rwbaker16.png"}
+		]
+	},
+	"visualization-danielgriffin13": {
+		name: "Pixels by Bots (u/danielgriffin13)",
+		code: "V3",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/bots-danielgriffin13.png"}
+		]
+	},
+	"visualization-officer-zhang": {
+		name: "Cooldown-Bypassed Pixels (u/officer-zhang)",
+		code: "V4",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/bypass-officer-zhang.jpg"}
+		]
+	},
+	"visualization-eyusd": {
+		name: "Heatmap (u/Eyusd)",
+		code: "V5",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/heatmap-eyusd.png"}
+		]
+	},
+	"visualization-lornedon": {
+		name: "Pixels by Age (u/Lornedon)",
+		code: "V6",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/age-lornedon.png"}
+		]
+	},
+	
 }
 
 const codeReference = {}
