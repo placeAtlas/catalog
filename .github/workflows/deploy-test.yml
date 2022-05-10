@@ -5,11 +5,13 @@ on:
       - master
     paths:
       - web/**
+      - .github/workflows/**
   # pull_request:
   #   branches:
   #     - master
   #   paths:
   #     - web/**
+  #     - .github/workflows/**
 
 name: Site Deployment
 
