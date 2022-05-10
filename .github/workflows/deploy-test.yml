@@ -1,0 +1,54 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - web/**
+  # pull_request:
+  #   branches:
+  #     - master
+  #   paths:
+  #     - web/**
+
+name: Site Deployment
+
+jobs:
+  deploy:
+    name: Deployment/Testing
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x 
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.8
+
+      - name: Execute preparation script
+        run: | 
+          FILE=tools/ci/build-prod.sh
+          rm -rf dist/
+          if [ -f $FILE ]; then 
+            bash $FILE
+          else 
+            cp -r web/ dist/;
+          fi
+
+      - name: Deploy site
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: ./dist/
+          force_orphan: true
