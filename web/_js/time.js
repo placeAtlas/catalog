@@ -219,8 +219,20 @@ const variationsConfig = {
 				timestamp: "Final",
 				url: "./_img/canvas/tfc/final.png",
 			},
+			{
+				timestamp: "Final (w/ Overlays)",
+				url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc/overlay/CHESS.png", "./_img/canvas/tfc/overlay/GAMESTOP.png", "./_img/canvas/tfc/overlay/PROFANITY.png"],
+			}
 		],
-		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192"><defs><style>.a{fill-rule:evenodd;}</style></defs><path class="a" d="M69.79,83.55c-.47,.65-.59,1.35-.59,1.35-.26,1.47,.76,2.72,.92,3.12,2.84,7.1,4.49,13.93,3.97,16.39-.47,2.18-5.6,5.65-12.36,8.33-3.63,1.44-6.11,2.99-8.04,5.01-7.17,7.51-10.24,17.86-7.14,24.05,3.93,7.84,18.38,5.86,28.05-3.85,2.09-2.1,3.15-3.83,6.63-10.77,2.97-5.93,4.26-8.05,5.47-8.95,2.04-1.52,9.82,.1,17.41,3.64,1.71,.8,2.31,1.04,2.78,.98,0,0,.22-.05,.43-.14,1.31-.59,17.43-17,25.58-25.34-1.79,.09-3.57,.18-5.36,.28-2.84,2.63-5.68,5.27-8.52,7.9-10.85-10.85-21.7-21.71-32.55-32.56,1.73-1.8,3.46-3.6,5.18-5.4-.29-1.56-.57-3.12-.86-4.69-1.34,1.27-19.42,18.45-21.01,20.66Zm-10.45,44.57c2.5,0,4.53,2.03,4.53,4.53s-2.03,4.53-4.53,4.53-4.53-2.03-4.53-4.53,2.03-4.53,4.53-4.53Z"/><path class="f" d="M132.9,97.36c-.88,.22-7.88,1.92-9.91-1.04-1.11-1.62-1.05-4.71-.52-6.57,.74-2.59,.9-4.06,.25-4.73-.73-.76-2.03-.31-3.73-.18-3.4,.27-8.08-.86-9.6-3.16-2.77-4.21,4.48-13.03,2.31-14.69-.17-.13-.34-.16-.67-.22-4.24-.73-6.79,4.71-11.66,5.1-2.93,.24-6.21-1.39-7.72-4.02-1.11-1.94-1-3.96-.86-4.95h0s7.38-7.39,17.6-17.52c12.75,12.73,25.51,25.47,38.26,38.2l-13.75,13.79Z"/><polygon points="154 0 154 38 39 38 39 192 0 192 0 0"/><polygon points="192 38 192 192 77 192 77 153 154 153 154 38"/></svg>'
+		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192"><defs><style>.a{fill-rule:evenodd;}</style></defs><path class="a" d="M69.79,83.55c-.47,.65-.59,1.35-.59,1.35-.26,1.47,.76,2.72,.92,3.12,2.84,7.1,4.49,13.93,3.97,16.39-.47,2.18-5.6,5.65-12.36,8.33-3.63,1.44-6.11,2.99-8.04,5.01-7.17,7.51-10.24,17.86-7.14,24.05,3.93,7.84,18.38,5.86,28.05-3.85,2.09-2.1,3.15-3.83,6.63-10.77,2.97-5.93,4.26-8.05,5.47-8.95,2.04-1.52,9.82,.1,17.41,3.64,1.71,.8,2.31,1.04,2.78,.98,0,0,.22-.05,.43-.14,1.31-.59,17.43-17,25.58-25.34-1.79,.09-3.57,.18-5.36,.28-2.84,2.63-5.68,5.27-8.52,7.9-10.85-10.85-21.7-21.71-32.55-32.56,1.73-1.8,3.46-3.6,5.18-5.4-.29-1.56-.57-3.12-.86-4.69-1.34,1.27-19.42,18.45-21.01,20.66Zm-10.45,44.57c2.5,0,4.53,2.03,4.53,4.53s-2.03,4.53-4.53,4.53-4.53-2.03-4.53-4.53,2.03-4.53,4.53-4.53Z"/><path class="f" d="M132.9,97.36c-.88,.22-7.88,1.92-9.91-1.04-1.11-1.62-1.05-4.71-.52-6.57,.74-2.59,.9-4.06,.25-4.73-.73-.76-2.03-.31-3.73-.18-3.4,.27-8.08-.86-9.6-3.16-2.77-4.21,4.48-13.03,2.31-14.69-.17-.13-.34-.16-.67-.22-4.24-.73-6.79,4.71-11.66,5.1-2.93,.24-6.21-1.39-7.72-4.02-1.11-1.94-1-3.96-.86-4.95h0s7.38-7.39,17.6-17.52c12.75,12.73,25.51,25.47,38.26,38.2l-13.75,13.79Z"/><polygon points="154 0 154 38 39 38 39 192 0 192 0 0"/><polygon points="192 38 192 192 77 192 77 153 154 153 154 38"/></svg>',
+		info: {
+			description: "Established since the 2017 event, The Final Clean is a collaborative cleanup effort for the final canvas of r/place.",
+			links: {
+				subreddit: ["TheFinalClean"],
+				discord: ["yttybMtH8N"],
+				website: ["https://www.reddit.com/r/place/comments/u27cth/communitycleaned_and_repaired_version_of_the/"]
+			}
+		}
 	},
 	"tfc-sl": {
 		name: "Streamerless",
@@ -270,7 +282,14 @@ const variationsConfig = {
 			{ timestamp: 1651889221, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651889221094.png"] },
 			{ timestamp: 1651893176, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651893176863.png"] },
 		],
-		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192"><path d="M-.07,0V192H191.93V38h-38V117.2l-28.5,28.8h-29.6l-24.89,25.2v-25.2H38.93V38h115V0H-.07Z"/><path d="M72.56,73.7l-7.64,7.64,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.63-7.64-7.87-7.87,7.87-7.87-7.63-7.64-7.87,7.87-7.87-7.87Z"/><path d="M137.39,73.7l-7.87,7.87-7.87-7.87-7.63,7.63,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.64-7.64-7.87-7.87,7.87-7.87-7.64-7.64Z"/></svg>'
+		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192"><path d="M-.07,0V192H191.93V38h-38V117.2l-28.5,28.8h-29.6l-24.89,25.2v-25.2H38.93V38h115V0H-.07Z"/><path d="M72.56,73.7l-7.64,7.64,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.63-7.64-7.87-7.87,7.87-7.87-7.63-7.64-7.87,7.87-7.87-7.87Z"/><path d="M137.39,73.7l-7.87,7.87-7.87-7.87-7.63,7.63,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.64-7.64-7.87-7.87,7.87-7.87-7.64-7.64Z"/></svg>',
+		info: {
+			description: "The Streamerless sub-project \"aims to remove anything streamer-made that covered community art.\" This development is still ongoing.",
+			links: {
+				subreddit: ["TheFinalClean"],
+				discord: ["yttybMtH8N"]
+			}
+		}
 	},
 	"tfc-uc": {
 		name: "Unofficial Corrections",
@@ -284,103 +303,168 @@ const variationsConfig = {
 			{ timestamp: 1652050001, url: "./_img/canvas/tfc-uc/1652050001062_final_0.png" },
 			{ timestamp: 1652140583, url: "./_img/canvas/tfc-uc/1652140583877_final_1.png" },
 			{ timestamp: "Final", url: "./_img/canvas/tfc-uc/1652141667878_final_2.png" },
-		]
+		],
+		info: {
+			description: "Unofficial Corrections is a post-TFC project that made \"corrections based on existing submissions that went awry, or corrections to corrections that went awry.\"",
+			links: {
+				subreddit: ["TheFinalClean"],
+				discord: ["yttybMtH8N"]
+			}
+		}
 	},
 	"#2": {
 		name: "Redditor Cuts"
 	},
-	"redditor-cut-scaevolus": {
+	"cut-scaevolus": {
 		name: "Last Averages (u/scaevolus)",
 		code: "R1",
 		default: 0,
 		versions: [
 			{ timestamp: "Last Hour Average", url: "./_img/canvas/redditor-cuts/hour-average-scaevolus.png"},
 			{ timestamp: "Last 5-Minute Average", url: "./_img/canvas/redditor-cuts/5-min-average-scaevolus.png"}
-		]
+		],
+		info: {
+			links: {
+				website: [
+					"https://www.reddit.com/r/place/comments/tx3w5f/rplace_denoised_final_image_8k/",
+					"https://www.reddit.com/r/place/comments/tx3w5f/comment/i3kpvnf/?context=3"
+				]
+			}
+		}
 	},
-	"redditor-cut-davidxga": {
+	"cut-davidxga": {
 		name: "Last Hour Median (u/DavidXGA)",
 		code: "R2",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/redditor-cuts/hour-median-davidxga.png"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/tx7q9z/i_took_the_median_value_of_every_pixel_in_the/"]
+			}
+		}
 	},
-	"redditor-cut-dankrudesandstorm": {
+	"cut-dankrudesandstorm": {
 		name: "u/DankRudeSandstorm Cut",
 		code: "R3",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/redditor-cuts/dankrudesandstorm-cut.png"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/tzigrs/i_removed_stray_pixels_restored_the_artwork_of/"]
+			}
+		}
 	},
-	"redditor-cut-tiktaalik414": {
+	"cut-tiktaalik414": {
 		name: "u/Tiktaalik414 Cut",
 		code: "R4",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/redditor-cuts/tiktaalik414-cut.png"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/u35sth/after_around_40_hours_editing_i_finally_present/"]
+			}
+		}
 	},
-	"redditor-cut-poisonsnow": {
+	"cut-poisonsnow": {
 		name: "u/PoisonSnow Cut",
 		code: "R5",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/redditor-cuts/poisonsnow-cut.png"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/thefinalclean/comments/twlyly/i_made_a_16000_x_16000_version_of_rplace_that/"]
+			}
+		}
 	},
 	"#3": {
 		name: "Visualizations"
 	},
-	"visualization-alpaca_fur": {
+	"viz-alpaca_fur": {
 		name: "Whole Average (u/alpaca_fur)",
 		code: "V1",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-alpaca_fur.png"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/tx14va/i_made_an_image_of_the_average_pixel_color_of/"]
+			}
+		}
 	},
-	"visualization-rwbaker16": {
+	"viz-rwbaker16": {
 		name: "Whole Average (u/Rwbaker16)",
 		code: "V2",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-rwbaker16.png"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/dataisbeautiful/comments/ty86cw/average_color_of_each_pixel_in_rplace_oc/"]
+			}
+		}
 	},
-	"visualization-danielgriffin13": {
+	"viz-danielgriffin13": {
 		name: "Pixels by Bots (u/danielgriffin13)",
 		code: "V3",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/bots-danielgriffin13.png"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/dataisbeautiful/comments/u1btsb/oc_the_impact_of_bots_on_rplace_users_that_posted/"]
+			}
+		}
 	},
-	"visualization-officer-zhang": {
+	"viz-officer-zhang": {
 		name: "Cooldown-Bypassed Pixels (u/officer-zhang)",
 		code: "V4",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/bypass-officer-zhang.jpg"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/dataisbeautiful/comments/tylnkn/i_found_rplace_cheaters_that_skirted_the_5_min/"]
+			}
+		}
 	},
-	"visualization-eyusd": {
+	"viz-eyusd": {
 		name: "Heatmap (u/Eyusd)",
 		code: "V5",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/heatmap-eyusd.png"}
-		]
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/dataisbeautiful/comments/twulb1/oc_heatmap_of_rplace_start_to_end/"]
+			}
+		}
 	},
-	"visualization-lornedon": {
+	"viz-lornedon": {
 		name: "Pixels by Age (u/Lornedon)",
 		code: "V6",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/age-lornedon.png"}
-		]
-	},
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/dataisbeautiful/comments/tzi1j0/oc_the_age_of_each_pixel_on_the_final_canvas_of/"]
+			}
+		}
+	}
 	
 }
 
