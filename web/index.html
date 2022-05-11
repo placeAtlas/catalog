@@ -17,13 +17,13 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>The 2022 r/place Atlas</title>
+		<title>The 2022 r/place Catalog</title>
 		<meta name="description" content="An interactive map of Reddit's 2022 r/place, with information to each artwork of the canvas provided by the community.">
 		<meta name="author" content="Place Atlas contributors (original by Roland Rytz)">
 		<meta name="application-name" content="The r/place Atlas 2022">
 		<meta name="robots" content="index, follow">
 		
-		<meta property="og:title" content="The 2022 r/place Atlas">
+		<meta property="og:title" content="The 2022 r/place Catalog">
 		<meta property="og:type" content="website">
 		<meta property="og:url" content="https://place-atlas.stefanocoding.me/">
 		<meta property="og:image" content="https://place-atlas.stefanocoding.me/_img/logo.png">
@@ -56,7 +56,7 @@
 			{
 				"@context": "https://schema.org",
 				"@type": "WebSite",
-				"name": "The 2022 r/place Atlas",
+				"name": "The 2022 r/place Catalog",
 				"url": "https://place-atlas.stefanocoding.me/",
 				"author": [
 					   {
@@ -121,7 +121,7 @@
 							<source srcset="./_img/favicon-dark.svg" media="(prefers-color-scheme: dark)">
 							<img class="d-block me-2" height="32" width="32" src="./_img/favicon.svg" alt="">
 						</picture>
-						The 2022 r/place Atlas
+						The 2022 r/place Catalog
 						<span class="badge bg-warning text-dark d-none d-md-inline-block ms-2">Beta</span>
 					</a>
 					<button class="navbar-toggler text-body collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,7 +131,7 @@
 						<ul class="navbar-nav me-auto my-2 my-md-0">
 							<li class="nav-item">
 								<div class="btn-group" role="group">
-									<button id="showListButton" class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasList" aria-controls="offcanvasList">Entries List</button>
+									<button id="showListButton" class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasList" aria-controls="offcanvasList">Information</button>
 								</div>
 							</li>
 						</ul>
@@ -145,9 +145,9 @@
 							<li class="nav-item col-6 col-md-auto">
 								<a class="nav-link active" href="./" aria-current="page">Atlas Map</a>
 							</li>
-							<li class="nav-item col-6 col-md-auto">
+							<!-- <li class="nav-item col-6 col-md-auto">
 								<a class="nav-link" href="https://place-wiki.stefanocoding.me/">Wiki</a>
-							</li>
+							</li> -->
 							<li class="nav-item col-6 col-md-auto">
 								<a class="nav-link" href="./about.html">About</a>
 							</li>
@@ -182,7 +182,7 @@
 			<div class="offcanvas offcanvas-start bg-body" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasList" aria-labelledby="offcanvasListLabel">
 				<header class="offcanvas-header py-2 border-bottom">
 					<div class="d-flex align-items-center py-1">
-						<h5 class="offcanvas-title" id="offcanvasListLabel">Atlas Entries List</h5>
+						<h5 class="offcanvas-title" id="offcanvasListLabel">Information</h5>
 					</div>
 					<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 				</header>
@@ -233,7 +233,11 @@
 					</datalist>
 				</div>
 				<div id="author" class="bg-body d-flex align-items-center justify-content-center py-1 px-2 rounded shadow" style="--bs-bg-opacity: .9;">
-					<span style="font-size: 0.7rem;">Code by <a href="https://github.com/placeAtlas" target="_blank" rel="noopener noreferrer">Place Atlas</a>. Source on <a href="https://github.com/placeAtlas/atlas" target="_blank" rel="noopener noreferrer">GitHub</a>. Site powered by <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">Netlify</a>.</span>
+					<span style="font-size: 0.7rem;">
+						Code by <a href="https://github.com/placeAtlas" target="_blank" rel="noopener noreferrer">Place Atlas</a>, forked by Hans5958.
+						Source on <a href="https://github.com/placeAtlas/atlas" target="_blank" rel="noopener noreferrer">GitHub</a>.
+						<!-- Site powered by <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">Netlify</a>. -->
+					</span>
 				</div>
 			</div>
 			<button type="button" id="closeObjectsListButton" class="d-none btn btn-secondary shadow p-0" aria-label="Close">
