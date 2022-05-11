@@ -18,7 +18,6 @@ const variationsConfig = {
 		name: "r/place",
 		code: "",
 		default: 164,
-		drawablePeriods: [1, 166],
 		versions: [
 			{ "timestamp": 1648818000, "url": ["./_img/canvas/place30ex/start.png"] },
 			{ "timestamp": 1648819800, "url": ["./_img/canvas/place30/005.png", "./_img/canvas/place30/000_005.png"] },
@@ -192,11 +191,13 @@ const variationsConfig = {
 		],
 		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192" aria-hidden="true"><polygon points="154 0 154 38 39 38 39 192 0 192 0 0"/><polygon points="192 38 192 192 77 192 77 153 154 153 154 38"/><rect x="77" y="77" width="38" height="38"/></svg>'
 	},
+	"#1": {
+		name: "The Final Clean"
+	},
 	tfc: {
 		name: "The Final Clean",
 		code: "T",
 		default: 2,
-		drawablePeriods: [0, 0],
 		versions: [
 			{
 				timestamp: "Draft 1",
@@ -217,7 +218,6 @@ const variationsConfig = {
 		name: "TFC - Streamerless",
 		code: "NS",
 		default: 40,
-		drawablePeriods: [0, 0],
 		versions: [
 			{ timestamp: 1649953207, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1649953207923.png"] },
 			{ timestamp: 1650037801, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1650037801565.png"] },
@@ -268,7 +268,6 @@ const variationsConfig = {
 		name: "TFC - Unofficial Corrections",
 		code: "NS",
 		default: 6,
-		drawablePeriods: [0, 0],
 		versions: [
 			{ timestamp: "Draft 1", url: "./_img/canvas/tfc-uc/1649971703561_TFC_PXcorrections.png" },
 			{ timestamp: "Draft 2", url: "./_img/canvas/tfc-uc/1651105992815_unknown.png" },
@@ -278,6 +277,9 @@ const variationsConfig = {
 			{ timestamp: 1652140583, url: "./_img/canvas/tfc-uc/1652140583877_final_1.png" },
 			{ timestamp: "Final", url: "./_img/canvas/tfc-uc/1652141667878_final_2.png" },
 		]
+	},
+	"#2": {
+		name: "Redditor Cuts"
 	},
 	"redditor-cut-scaevolus": {
 		name: "Last Averages (u/scaevolus)",
@@ -319,6 +321,9 @@ const variationsConfig = {
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/redditor-cuts/poisonsnow-cut.png"}
 		]
+	},
+	"#3": {
+		name: "Visualizations"
 	},
 	"visualization-alpaca_fur": {
 		name: "Whole Average (u/alpaca_fur)",
@@ -377,11 +382,16 @@ const imageCache = {}
 const variantsEl = document.getElementById("variants")
 
 for (const variation in variationsConfig) {
-	codeReference[variationsConfig[variation].code] = variation
 	const optionEl = document.createElement('option')
-	optionEl.value = variation
-	optionEl.textContent = variationsConfig[variation].name
 	variantsEl.appendChild(optionEl)
+	optionEl.textContent = variationsConfig[variation].name
+	if (variation.startsWith('#')) {
+		optionEl.disabled = true
+		optionEl.classList.add('fw-bold', 'fst-italic')
+		continue 
+	}
+	codeReference[variationsConfig[variation].code] = variation
+	optionEl.value = variation
 }
 
 const timelineSlider = document.getElementById("timeControlsSlider")
@@ -442,9 +452,11 @@ async function updateBackground(newPeriod = currentPeriod, newVariation = curren
 	if (variationConfig.icon) {
 		variantsEl.previousElementSibling.innerHTML = variationConfig.icon
 		variantsEl.previousElementSibling.classList.remove('d-none')
+		variantsEl.parentElement.classList.add('input-group')
 	} else {
 		variantsEl.previousElementSibling.innerHTML = ""
 		variantsEl.previousElementSibling.classList.add('d-none')
+		variantsEl.parentElement.classList.remove('input-group')
 	}
 
 
