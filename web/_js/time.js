@@ -413,9 +413,22 @@ const variationsConfig = {
 			}
 		}
 	},
+	"viz-murgos-1": {
+		name: "Whole Average (u/Murgos)",
+		code: "V3",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-murgos.png"}
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/u02013/rplace_average_color_of_every_pixel_go_canada/"]
+			}
+		}
+	},
 	"viz-danielgriffin13": {
 		name: "Pixels by Bots (u/danielgriffin13)",
-		code: "V3",
+		code: "V4",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/bots-danielgriffin13.png"}
@@ -428,7 +441,7 @@ const variationsConfig = {
 	},
 	"viz-officer-zhang": {
 		name: "Cooldown-Bypassed Pixels (u/officer-zhang)",
-		code: "V4",
+		code: "V5",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/bypass-officer-zhang.jpg"}
@@ -441,7 +454,7 @@ const variationsConfig = {
 	},
 	"viz-eyusd": {
 		name: "Heatmap (u/Eyusd)",
-		code: "V5",
+		code: "V6",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/heatmap-eyusd.png"}
@@ -454,7 +467,7 @@ const variationsConfig = {
 	},
 	"viz-lornedon": {
 		name: "Pixels by Age (u/Lornedon)",
-		code: "V6",
+		code: "V7",
 		default: 0,
 		versions: [
 			{ timestamp: "", url: "./_img/canvas/visualizations/age-lornedon.png"}
@@ -464,8 +477,47 @@ const variationsConfig = {
 				website: ["https://www.reddit.com/r/dataisbeautiful/comments/tzi1j0/oc_the_age_of_each_pixel_on_the_final_canvas_of/"]
 			}
 		}
-	}
-	
+	},
+	"viz-always-white": {
+		name: "Always White Pixels",
+		code: "V8",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/always-white.png"}
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/tyjn6v/longest_living_pixel/"]
+			}
+		}
+	},
+	"viz-murgos-2": {
+		name: "Longest Pixel Time (u/Murgos)",
+		code: "V9",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/longest-murgos.png"}
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/tz71el/all_pixels_in_the_color_with_the_longest_screen/"]
+			}
+		}
+	},
+	"viz-linuxcde98": {
+		name: "Longest Pixel Time (u/LinuxCDE98)",
+		code: "V9",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/visualizations/longest-linuxcde98.png"}
+		],
+		info: {
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/u081ac/rplace_but_pixels_are_the_color_surving_the/"]
+			}
+		}
+	},
+
 }
 
 const codeReference = {}
@@ -483,6 +535,7 @@ for (const variation in variationsConfig) {
 		continue 
 	}
 	codeReference[variationsConfig[variation].code] = variation
+	codeReference[variation] = variation
 	optionEl.value = variation
 }
 
