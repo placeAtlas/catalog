@@ -82,13 +82,9 @@ async function init() {
 			window.history.replaceState({}, '', newLocation)
 		}
 	}
-
-	const hash = window.location.hash.substring(1)
-	const [, period] = hash.split('/')
-
-	if (period) {
-		const [, targetPeriod, targetVariation] = parsePeriod(period)
-		await updateTime(targetPeriod, targetVariation)
+	
+	if (window.location.hash) {
+		highlightEntryFromUrl()
 	} else {
 		await updateTime(currentPeriod, currentVariation)
 	}

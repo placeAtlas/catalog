@@ -258,6 +258,26 @@ async function render() {
 
 }
 
+window.addEventListener("hashchange", highlightEntryFromUrl)
+
+function highlightEntryFromUrl() {
+
+	const hash = window.location.hash.substring(1); //Remove hash prefix
+	let [id, period] = hash.split('/')
+
+	if (id && !period) period = id
+	
+	if (!period) return
+
+	if (period) {
+		const [, targetPeriod, targetVariation] = parsePeriod(period)
+		updateTime(targetPeriod, targetVariation, true)
+	} else {
+		updateTime(defaultPeriod, defaultVariation, true)
+	}
+
+}
+
 function initExplore() {
 
 	window.updateHovering = updateHovering
@@ -340,8 +360,4 @@ function initViewGlobal() {
 			}
 		}
 	})
-
-	if (window.location.hash) { // both "/" and just "/#" will be an empty hash string
-		highlightEntryFromUrl()
-	}
 }
