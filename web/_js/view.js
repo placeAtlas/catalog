@@ -26,8 +26,6 @@ const offcanvasList = document.getElementById("offcanvasList")
 
 const objectsListOverflowNotice = document.getElementById("objectsListOverflowNotice")
 
-const entriesList = document.getElementById("entriesList")
-
 let lastPos = [0, 0]
 
 let fixed = false; // Fix hovered items in place, so that clicking on links is possible
