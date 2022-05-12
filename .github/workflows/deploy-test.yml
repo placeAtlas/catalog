@@ -6,12 +6,14 @@ on:
     paths:
       - web/**
       - .github/workflows/**
+      - tools/ci/**
   # pull_request:
   #   branches:
   #     - master
   #   paths:
   #     - web/**
   #     - .github/workflows/**
+  #     - tools/ci/**
 
 name: Site Deployment
 
