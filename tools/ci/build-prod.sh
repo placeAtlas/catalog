@@ -12,7 +12,7 @@ cp tools/ci/.parcelrc ./
 
 npm i
 python tools/ci/cdn-to-local.py
-npx parcel build dist-temp/index.html dist-temp/**.html --dist-dir "dist" --no-source-maps --no-content-hash
+npx parcel build dist-temp/index.html dist-temp/**.html --dist-dir "dist" --no-source-maps --no-content-hash --public-url ./
 
 rm -rf dist-temp
 rm -rf postcss.config.js
