@@ -185,7 +185,7 @@ const variationsConfig = {
 			{ "timestamp": 1649107800, "url": ["./_img/canvas/place30/159.png", "./_img/canvas/place30/160_159.png"] },
 			{ "timestamp": 1649109600, "url": ["./_img/canvas/place30/159.png", "./_img/canvas/place30/161_159.png"] },
 			{ "timestamp": 1649111400, "url": ["./_img/canvas/place30/159.png", "./_img/canvas/place30/162_159.png"] },
-			{ "timestamp": 1649112460, "url": ["./_img/canvas/place30ex/final.png"] },
+			{ "timestamp": ["Final Canvas", 1649112460], "url": ["./_img/canvas/place30ex/final.png"] },
 			{ "timestamp": 1649113200, "url": ["./_img/canvas/place30/159.png", "./_img/canvas/place30/163_159.png"] },
 			{ "timestamp": 1649115000, "url": ["./_img/canvas/place30/159.png", "./_img/canvas/place30/164_159.png"] },
 			{ "timestamp": 1649116800, "url": ["./_img/canvas/place30/159.png", "./_img/canvas/place30/165_159.png"] },
@@ -193,7 +193,15 @@ const variationsConfig = {
 		],
 		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192" aria-hidden="true"><polygon points="154 0 154 38 39 38 39 192 0 192 0 0"/><polygon points="192 38 192 192 77 192 77 153 154 153 154 38"/><rect x="77" y="77" width="38" height="38"/></svg>',
 		info: {
-			description: "The original r/place canvas in 30-minute increments.",
+			description: `The original r/place canvas in 30-minute increments.
+
+			Some have visited a canvas before.
+
+			A place where togetherness created more.
+
+			Now in numbers far greater, taking more space,
+
+			It falls upon you to create a better place.`,
 			links: {
 				subreddit: ["place"]
 			}
@@ -236,8 +244,8 @@ const variationsConfig = {
 	},
 	"tfc-sl": {
 		name: "Streamerless",
-		code: "NS",
-		default: 40,
+		code: "TS",
+		default: 42,
 		versions: [
 			{ timestamp: 1649953207, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1649953207923.png"] },
 			{ timestamp: 1650037801, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1650037801565.png"] },
@@ -281,10 +289,32 @@ const variationsConfig = {
 			{ timestamp: 1651625582, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651625582430.png"] },
 			{ timestamp: 1651889221, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651889221094.png"] },
 			{ timestamp: 1651893176, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651893176863.png"] },
+			// UPDATE
+			{ timestamp: 1652314401, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1652314401151.png"] },
+			{ timestamp: ["Version 1", 1652583813], url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1652583813669.png"] },
 		],
 		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192"><path d="M-.07,0V192H191.93V38h-38V117.2l-28.5,28.8h-29.6l-24.89,25.2v-25.2H38.93V38h115V0H-.07Z"/><path d="M72.56,73.7l-7.64,7.64,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.63-7.64-7.87-7.87,7.87-7.87-7.63-7.64-7.87,7.87-7.87-7.87Z"/><path d="M137.39,73.7l-7.87,7.87-7.87-7.87-7.63,7.63,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.64-7.64-7.87-7.87,7.87-7.87-7.64-7.64Z"/></svg>',
 		info: {
-			description: "The Streamerless sub-project \"aims to remove anything streamer-made that covered community art.\" This development is still ongoing.",
+			description: "The Streamerless sub-project \"aims to remove anything streamer-made that covered community art.\" This development is still ongoing, but version 1 is now available.",
+			links: {
+				subreddit: ["TheFinalClean"],
+				discord: ["yttybMtH8N"]
+			}
+		}
+	},
+	"tfc-slp": {
+		name: "Streamerless (Purist)",
+		code: "TSP",
+		default: 3,
+		versions: [
+			{ timestamp: 1651627050, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651625582430.png", "./_img/canvas/tfc-slp/1651627050710.png"] },
+			{ timestamp: 1651638896, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651625582430.png", "./_img/canvas/tfc-slp/1651638896462.png"] },
+			{ timestamp: 1651889243, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651889221094.png", "./_img/canvas/tfc-slp/1651889243135.png"] },
+			{ timestamp: 1652358272, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1652314401151.png", "./_img/canvas/tfc-slp/1652358272667.png"] },
+		],
+		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192"><path d="M-.07,0V192H191.93V38h-38V117.2l-28.5,28.8h-29.6l-24.89,25.2v-25.2H38.93V38h115V0H-.07Z"/><path d="M72.56,73.7l-7.64,7.64,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.63-7.64-7.87-7.87,7.87-7.87-7.63-7.64-7.87,7.87-7.87-7.87Z"/><path d="M137.39,73.7l-7.87,7.87-7.87-7.87-7.63,7.63,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.64-7.64-7.87-7.87,7.87-7.87-7.64-7.64Z"/></svg>',
+		info: {
+			description: "The purist form of the Streamerless project, which excludes all streamer-related art (art that is related to streamers, or art that is done with help of streamers). This development is still ongoing.",
 			links: {
 				subreddit: ["TheFinalClean"],
 				discord: ["yttybMtH8N"]
@@ -293,7 +323,7 @@ const variationsConfig = {
 	},
 	"tfc-uc": {
 		name: "Unofficial Corrections",
-		code: "NS",
+		code: "TU",
 		default: 6,
 		versions: [
 			{ timestamp: "Draft 1", url: "./_img/canvas/tfc-uc/1649971703561_TFC_PXcorrections.png" },
@@ -320,10 +350,11 @@ const variationsConfig = {
 		code: "R1",
 		default: 0,
 		versions: [
-			{ timestamp: "Last Hour Average", url: "./_img/canvas/redditor-cuts/hour-average-scaevolus.png"},
-			{ timestamp: "Last 5-Minute Average", url: "./_img/canvas/redditor-cuts/5-min-average-scaevolus.png"}
+			{ timestamp: "Last Hour Average", url: "./_img/canvas/redditor-cuts/hour-average-scaevolus.png" },
+			{ timestamp: "Last 5-Minute Average", url: "./_img/canvas/redditor-cuts/5-min-average-scaevolus.png" }
 		],
 		info: {
+			description: "The \"denoised\" final images made by u/scaevolus. Two versions are offered, one of them is made by request.",
 			links: {
 				website: [
 					"https://www.reddit.com/r/place/comments/tx3w5f/rplace_denoised_final_image_8k/",
@@ -337,9 +368,10 @@ const variationsConfig = {
 		code: "R2",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/redditor-cuts/hour-median-davidxga.png"}
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/hour-median-davidxga.png" }
 		],
 		info: {
+			description: "u/DavidXGA \"took median value of every pixel in the last hour\" for this cut of the final canvas.",
 			links: {
 				website: ["https://www.reddit.com/r/place/comments/tx7q9z/i_took_the_median_value_of_every_pixel_in_the/"]
 			}
@@ -350,9 +382,10 @@ const variationsConfig = {
 		code: "R3",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/redditor-cuts/dankrudesandstorm-cut.png"}
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/dankrudesandstorm-cut.png" }
 		],
 		info: {
+			description: "A manual edit of the final canvas, made by u/DankRudeSandstorm.",
 			links: {
 				website: ["https://www.reddit.com/r/place/comments/tzigrs/i_removed_stray_pixels_restored_the_artwork_of/"]
 			}
@@ -363,9 +396,20 @@ const variationsConfig = {
 		code: "R4",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/redditor-cuts/tiktaalik414-cut.png"}
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/tiktaalik414-cut.png" }
 		],
 		info: {
+			description: `From the author:
+
+			Hoo boy, this was a much bigger task than I had envisioned it. A little over a week ago I started with this post and got a crazy amount of feedback, much more than I had thought I would get. To be dead honest I wasn't sure if I was going to finish it, but the positive feedback I got drove me to buckle down and really hammer this thing out both well and in a timely fashion.
+
+			To make this I pulled from about 5 different version of the canvas, including a version by u/DavidXGA made by taking the median value of all the pixels on the canvas in the final hour, which was a great reference as it helped remove a lot of the noise from the canvas. I also referenced an unfinished version of the canvas edit being made by r/thefinalclean when all other sources failed me, so a big thank you and props to them for their undertaking.
+
+			My philosophy when making this was to try and retain as much originality as possible, as opposed to the thefinalclean team whose goal was more centered on creating the cleanest version of the canvas possible. Any fun little quirks, I wanted to stay in the canvas. That means all the little hidden among us characters, tiny non-invasive pixel arts, and so on. In areas where there was a particularly large amount of chaos going on, my goal was to simply retain the chaos there and clean up as best I can around it, as it wouldn't feel right to make any significant changes to a community project to me.
+
+			I recognize that this project is imperfect, and by the very nature of making something like this, certain arts will have to have been excluded. Unfortunately, that's just how things are, and for anyone whose art didn't make the cut, I'm sorry. I may or may not come back to this post to fix some minor flaws the the future, but don't expect changes if it's only a couple pixels off. If I did make any major mistakes though, sound off in the comments and I'll take note of it.
+
+			Thank you so much everyone for your support in making this! r/place was genuinely the most fun I had on reddit in years and I'm happy to give back to the community. If you like what I've done, all I ask for is an upvote and for you to enjoy whatever use you may find for my cleanup. Thanks again everyone, love you all!`,
 			links: {
 				website: ["https://www.reddit.com/r/place/comments/u35sth/after_around_40_hours_editing_i_finally_present/"]
 			}
@@ -376,11 +420,65 @@ const variationsConfig = {
 		code: "R5",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/redditor-cuts/poisonsnow-cut.png"}
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/poisonsnow-cut.png" }
+		],
+		info: {
+			description: `From the author:
+
+			Hey all!
+
+			I made this edit of r/Place with the classic void monster, the best version of the French flag, and ugly stremer logos replaced with their original small community artworks.
+
+			It's not a completed version by any means - if anybody has source images for things they want to be added back into place, I still have the upscaled photoshop file.`,
+			links: {
+				website: ["https://www.reddit.com/r/thefinalclean/comments/twlyly/i_made_a_16000_x_16000_version_of_rplace_that/"]
+			}
+		}
+	},
+	"cut-kidkadburgeur": {
+		name: "u/kidkadburgeur Cut",
+		code: "R6",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/kidkadburgeur-cut.png" }
+		],
+		info: {
+			description: `A manual edit of the final canvas, made by u/kidkadburgeur.`,
+			links: {
+				website: ["https://www.reddit.com/r/thefinalclean/comments/twlyly/i_made_a_16000_x_16000_version_of_rplace_that/"]
+			}
+		}
+	},
+	"cut-murgos": {
+		name: "Longest Pixel Time (u/Murgos)",
+		code: "R7",
+		default: 0,
+		versions: [
+			{ timestamp: "Longest Whole", url: "./_img/canvas/redditor-cuts/whole-longest-murgos.png" },
+			{ timestamp: "Longest Last Hour", url: "./_img/canvas/redditor-cuts/last-hour-longest-murgos.png" }
+		],
+		info: {
+			description: `Two versions are offered, one of them is made by request.
+
+			From the author:
+
+			Accumulated the screen time for every color on every pixel location.
+The image shows the color which has accumulated the longest screen time up until 2020-04-04 22:47:40.185, which should be more or less the time when only white appeared. There doesn't seem to be a hard cutoff though.`,
+			links: {
+				website: ["https://www.reddit.com/r/place/comments/tz71el/all_pixels_in_the_color_with_the_longest_screen/", "https://www.reddit.com/r/place/comments/tz71el/comment/i4513e1/?utm_source=share&utm_medium=web2x&context=3"]
+			}
+		}
+	},
+	"cut-linuxcde98": {
+		name: "Longest Pixel Time (u/LinuxCDE98)",
+		code: "R8",
+		default: 0,
+		versions: [
+			{ timestamp: "", url: "./_img/canvas/redditor-cuts/longest-linuxcde98.png" }
 		],
 		info: {
 			links: {
-				website: ["https://www.reddit.com/r/thefinalclean/comments/twlyly/i_made_a_16000_x_16000_version_of_rplace_that/"]
+				website: ["https://www.reddit.com/r/place/comments/u081ac/rplace_but_pixels_are_the_color_surving_the/"]
 			}
 		}
 	},
@@ -392,9 +490,10 @@ const variationsConfig = {
 		code: "V1",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-alpaca_fur.png"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-alpaca_fur.png" }
 		],
 		info: {
+			description: "The average color of each pixel of the canvas, made by u/alpaca_fur",
 			links: {
 				website: ["https://www.reddit.com/r/place/comments/tx14va/i_made_an_image_of_the_average_pixel_color_of/"]
 			}
@@ -405,9 +504,10 @@ const variationsConfig = {
 		code: "V2",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-rwbaker16.png"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-rwbaker16.png" }
 		],
 		info: {
+			description: "The average color of each pixel of the canvas, made by u/wrbaker16",
 			links: {
 				website: ["https://www.reddit.com/r/dataisbeautiful/comments/ty86cw/average_color_of_each_pixel_in_rplace_oc/"]
 			}
@@ -418,9 +518,10 @@ const variationsConfig = {
 		code: "V3",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-murgos.png"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/whole-average-murgos.png" }
 		],
 		info: {
+			description: "The average color of each pixel of the canvas, made by u/Murgos",
 			links: {
 				website: ["https://www.reddit.com/r/place/comments/u02013/rplace_average_color_of_every_pixel_go_canada/"]
 			}
@@ -431,9 +532,12 @@ const variationsConfig = {
 		code: "V4",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/bots-danielgriffin13.png"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/bots-danielgriffin13.png" }
 		],
 		info: {
+			description: `From the author:
+
+			The impact of bots on /r/place - users that posted at least every 15 minutes for over 16 hours accounted for 8,634,785 places. This shows the most placed colour by bots at each location.`,
 			links: {
 				website: ["https://www.reddit.com/r/dataisbeautiful/comments/u1btsb/oc_the_impact_of_bots_on_rplace_users_that_posted/"]
 			}
@@ -444,9 +548,18 @@ const variationsConfig = {
 		code: "V5",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/bypass-officer-zhang.jpg"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/bypass-officer-zhang.jpg" }
 		],
 		info: {
+			description: `This variation has been deleted on the original post, but has been recovered. The quality is quite decreased due to the fact that it is a JPEG.
+
+			From the author:
+
+			Data source: official r/place dataset (https://www.reddit.com/r/place/comments/txvk2d/rplace_datasets_april_fools_2022/?utm_source=share&utm_medium=ios_app&utm_name=iossmf)
+
+			Methodology: I looked for instances where a user placed two pixels in under 5min, bypassing the official cooldown. I found a total of 10,994 such events involving 3,128 users. The average cooldown time for these events are 0.012s, with 95% of them under 0.035s.
+
+			Here are these events visualized on the final r/place canvas.`,
 			links: {
 				website: ["https://www.reddit.com/r/dataisbeautiful/comments/tylnkn/i_found_rplace_cheaters_that_skirted_the_5_min/"]
 			}
@@ -457,9 +570,18 @@ const variationsConfig = {
 		code: "V6",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/heatmap-eyusd.png"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/heatmap-eyusd.png" }
 		],
 		info: {
+			description: `The canvas has been scaled to 2000x2000 with the bilinear algorithm.
+
+			From the author:
+
+			This is pretty straigthforward : whenever a pixel is changed bewteen two snapshots available on rplace.space, the heatmap becomes more red.
+
+			This took an hour to render, using a small python script
+
+			Also, I've just seen on the front page that a similar post has been added to r/place If you're wondering why both are relevant : 1- I should check the front page more often, and I wanted to post this image I find pretty 2- The post on r/place recalibrated the weight of each pixel based on the time it was active, therefore 1h on the bottom region has the same weight as 3h on the top left one. I found it a bit biased, and wanted to be able to compare the sheer scale of the final battles, or the length of the fight for the Canadian leaf`,
 			links: {
 				website: ["https://www.reddit.com/r/dataisbeautiful/comments/twulb1/oc_heatmap_of_rplace_start_to_end/"]
 			}
@@ -470,54 +592,49 @@ const variationsConfig = {
 		code: "V7",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/age-lornedon.png"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/age-lornedon.png" }
 		],
 		info: {
+			description: "From the author: The age of each pixel on the final canvas of /r/place. Darker pixels are older.",
 			links: {
 				website: ["https://www.reddit.com/r/dataisbeautiful/comments/tzi1j0/oc_the_age_of_each_pixel_on_the_final_canvas_of/"]
 			}
 		}
 	},
-	"viz-always-white": {
-		name: "Always White Pixels",
+	"viz-always-white-?": {
+		name: "Always White Pixels (?)",
 		code: "V8",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/always-white.png"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/always-white.png" }
 		],
 		info: {
+			description: "The image is obtained from a post, which itself linked a Discord attachment. If you know who made this variation specifically, please tell me.",
 			links: {
 				website: ["https://www.reddit.com/r/place/comments/tyjn6v/longest_living_pixel/"]
 			}
 		}
 	},
-	"viz-murgos-2": {
-		name: "Longest Pixel Time (u/Murgos)",
-		code: "V9",
+	"viz-always-white-paultron10110": {
+		name: "Always White Pixels (u/paultron10110)",
+		code: "V8",
 		default: 0,
 		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/longest-murgos.png"}
+			{ timestamp: "", url: "./_img/canvas/visualizations/always-white-paultron10110.png" }
 		],
 		info: {
-			links: {
-				website: ["https://www.reddit.com/r/place/comments/tz71el/all_pixels_in_the_color_with_the_longest_screen/"]
-			}
-		}
-	},
-	"viz-linuxcde98": {
-		name: "Longest Pixel Time (u/LinuxCDE98)",
-		code: "V9",
-		default: 0,
-		versions: [
-			{ timestamp: "", url: "./_img/canvas/visualizations/longest-linuxcde98.png"}
-		],
-		info: {
-			links: {
-				website: ["https://www.reddit.com/r/place/comments/u081ac/rplace_but_pixels_are_the_color_surving_the/"]
-			}
-		}
-	},
+			description: `From the author:
 
+			Made with Python, Pandas, and JupyterLab.
+
+			I was making a heat map of the data and I discovered there were pixels that had never been placed, thus remained white the whole time. I had to re-download the data to confirm I hadn't messed it up somewhere but sure enough, there are quite a few places that were never.... placed.
+
+			Pixels that have zero places have been colored red over the desaturated final image.`,
+			links: {
+				website: ["https://www.reddit.com/r/dataisbeautiful/comments/uhz68b/lonely_rplace_pixels_that_were_never_placed/"]
+			}
+		}
+	},
 }
 
 const codeReference = {}
@@ -532,7 +649,7 @@ for (const variation in variationsConfig) {
 	if (variation.startsWith('#')) {
 		optionEl.disabled = true
 		optionEl.classList.add('fw-bold', 'fst-italic')
-		continue 
+		continue
 	}
 	codeReference[variationsConfig[variation].code] = variation
 	codeReference[variation] = variation
@@ -693,7 +810,14 @@ function updateTooltip(newPeriod, newVariation) {
 	const configObject = variationsConfig[newVariation].versions[newPeriod]
 
 	// If timestap is a number return a UTC formatted date otherwise use exact timestap label
-	if (typeof configObject.timestamp === "number") tooltip.querySelector('div').textContent = new Date(configObject.timestamp * 1000).toUTCString()
+	if (Array.isArray(configObject.timestamp)) {
+		tooltip.querySelector('div').textContent = ""
+		configObject.timestamp.forEach(timestamp => {
+			if (tooltip.querySelector('div').textContent) tooltip.querySelector('div').innerHTML += "<br />"
+			if (typeof timestamp === "number") tooltip.querySelector('div').innerHTML += new Date(timestamp * 1000).toUTCString()
+			else tooltip.querySelector('div').innerHTML += timestamp
+		})
+	} else if (typeof configObject.timestamp === "number") tooltip.querySelector('div').textContent = new Date(configObject.timestamp * 1000).toUTCString()
 	else tooltip.querySelector('div').textContent = configObject.timestamp
 
 	// Clamps position of tooltip to prevent from going off screen
