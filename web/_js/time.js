@@ -311,6 +311,7 @@ const variationsConfig = {
 			{ timestamp: 1651638896, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651625582430.png", "./_img/canvas/tfc-slp/1651638896462.png"] },
 			{ timestamp: 1651889243, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1651889221094.png", "./_img/canvas/tfc-slp/1651889243135.png"] },
 			{ timestamp: 1652358272, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1652314401151.png", "./_img/canvas/tfc-slp/1652358272667.png"] },
+			{ timestamp: 1653153523, url: ["./_img/canvas/tfc/final.png", "./_img/canvas/tfc-sl/1652583813669.png", "./_img/canvas/tfc-slp/1653153523529.png"] },
 		],
 		icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 192 192"><path d="M-.07,0V192H191.93V38h-38V117.2l-28.5,28.8h-29.6l-24.89,25.2v-25.2H38.93V38h115V0H-.07Z"/><path d="M72.56,73.7l-7.64,7.64,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.63-7.64-7.87-7.87,7.87-7.87-7.63-7.64-7.87,7.87-7.87-7.87Z"/><path d="M137.39,73.7l-7.87,7.87-7.87-7.87-7.63,7.63,7.87,7.87-7.87,7.87,7.64,7.64,7.87-7.87,7.87,7.87,7.64-7.64-7.87-7.87,7.87-7.87-7.64-7.64Z"/></svg>',
 		info: {
