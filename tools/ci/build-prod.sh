@@ -10,7 +10,7 @@ cp tools/ci/postcss.config.js ./
 cp tools/ci/package.json ./
 cp tools/ci/.parcelrc ./
 
-if [ "$netlify" = true ]; then
+if [ "$NETLIFY" = true ]; then
 	echo ".d-none.d-netlify-block {display: block}" >> dist-temp/_css/style.css
 fi
 

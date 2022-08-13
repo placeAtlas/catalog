@@ -1,6 +1,6 @@
 [![Entry count](https://img.shields.io/badge/dynamic/json?color=blue&label=entries&query=%24.length&url=https%3A%2F%2Fgithub.com%2FplaceAtlas%2Fatlas%2Fblob%2Fmaster%2Fweb%2Fatlas.json%3Fraw%3Dtrue)](https://place-atlas.stefanocoding.me/)
 ![Commit activity](https://img.shields.io/github/commit-activity/w/Hans5958/place-catalog)
-[![Netlify (mirror)](https://img.shields.io/netlify/1e7291ce-0680-45ed-9843-47a32a992bbb?logo=netlify&logoColor=white)](https://app.netlify.com/sites/place-atlas/deploys)
+[![Netlify (mirror)](https://img.shields.io/netlify/908fc614-9bc8-4b2e-a923-46b50bc7df70?logo=netlify&logoColor=white)](https://app.netlify.com/sites/place-atlas/deploys)
 [![License](https://img.shields.io/github/license/Hans5958/place-catalog)](https://github.com/Hans5958/place-catalog/blob/master/LICENSE)  
 [![Discord](https://img.shields.io/discord/960791635342524496?color=%235865F2&logo=discord&logoColor=white)](https://discord.gg/pJkm23b2nA)
 [![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/placeAtlas2?color=%23FF4500&label=r%2FplaceAtlas2&logo=reddit&logoColor=white)](https://www.reddit.com/r/placeAtlas2/)
