@@ -10,11 +10,9 @@ cp tools/ci/postcss.config.js ./
 cp tools/ci/package.json ./
 cp tools/ci/.parcelrc ./
 
-echo "Netlify detection..."
-echo "$NETLIFY"
 if [ "$NETLIFY" = true ]; then
-	echo "Netlify detected."
-	echo ".d-none.d-netlify-block {display: block}" >> dist-temp/_css/style.css
+	echo "Netlify detected. Showing Netlify elements."
+	echo ".d-none.d-netlify-block {display: block !important}" >> dist-temp/_css/style.css
 fi
 
 npm i
