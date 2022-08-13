@@ -1,12 +1,11 @@
 /*
 	========================================================================
-	The 2022 /r/place Atlas
-
-	An atlas of Reddit's 2022 /r/place, with information to each
-	artwork	of the canvas provided by the community.
+	The 2022 r/place Catalog
+	The catalog of all canvas variations of r/place of 2022.
 
 	Copyright (c) 2017 Roland Rytz <roland@draemm.li>
 	Copyright (c) 2022 Place Atlas contributors
+	Copyright (c) 2022 Hans5958
 
 	Licensed under the GNU Affero General Public License Version 3
 	https://place-atlas.stefanocoding.me/license.txt
