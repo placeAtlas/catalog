@@ -10,6 +10,10 @@ cp tools/ci/postcss.config.js ./
 cp tools/ci/package.json ./
 cp tools/ci/.parcelrc ./
 
+if [ "$netlify" = true ]; then
+	echo ".d-none.d-netlify-block {display: block}" >> dist-temp/_css/style.css
+fi
+
 npm i
 python tools/ci/cdn-to-local.py
 npx parcel build dist-temp/index.html dist-temp/**.html --dist-dir "dist" --no-source-maps --no-content-hash --public-url ./
