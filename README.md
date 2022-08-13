@@ -6,7 +6,7 @@
 [![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/placeAtlas2?color=%23FF4500&label=r%2FplaceAtlas2&logo=reddit&logoColor=white)](https://www.reddit.com/r/placeAtlas2/)
 [![Website](https://img.shields.io/static/v1?label=website&message=place-atlas.stefanocoding.me&color=blue)](https://place-atlas.stefanocoding.me/)
 
-# The 2022 r/place Atlas
+# The 2022 r/place Catalog
 
 This is a project to collect all canvas variations of Reddit's r/place April Fools event in 2022. These canvases are collected from various sources, primarily Reddit sources.
 
