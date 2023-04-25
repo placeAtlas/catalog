@@ -1,5 +1,6 @@
 ![Commit activity](https://img.shields.io/github/commit-activity/w/Hans5958/place-catalog)
-[![Netlify (mirror)](https://img.shields.io/netlify/908fc614-9bc8-4b2e-a923-46b50bc7df70?logo=netlify&logoColor=white)](https://app.netlify.com/sites/place-atlas/deploys)
+[![Netlify deployment status (mirror)](https://img.shields.io/netlify/908fc614-9bc8-4b2e-a923-46b50bc7df70?logo=netlify&logoColor=white)](https://app.netlify.com/sites/place-catalog/deploys)
+[![GitHub Pages deployment status](https://img.shields.io/github/actions/workflow/status/Hans5958/place-catalog/deploy-test.yml?label=github&logo=github)](https://github.com/Hans5958/place-catalog/actions/workflows/deploy-test.yml)
 [![License](https://img.shields.io/github/license/Hans5958/place-catalog)](https://github.com/Hans5958/place-catalog/blob/master/LICENSE)  
 [![Discord](https://img.shields.io/discord/960791635342524496?color=%235865F2&logo=discord&logoColor=white)](https://discord.gg/pJkm23b2nA)
 [![Subreddit subscribers](https://img.shields.io/reddit/subreddit-subscribers/placeAtlas2?color=%23FF4500&label=r%2FplaceAtlas2&logo=reddit&logoColor=white)](https://www.reddit.com/r/placeAtlas2/)
