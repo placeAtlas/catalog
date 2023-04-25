@@ -1,15 +1,9 @@
 <!--
-	========================================================================
 	The 2022 r/place Catalog
-	The catalog of all canvas variations of r/place of 2022.
-
 	Copyright (c) 2017 Roland Rytz <roland@draemm.li>
 	Copyright (c) 2022 Place Atlas contributors
 	Copyright (c) 2022 Hans5958
-
-	Licensed under the GNU Affero General Public License Version 3
-	https://place-atlas.stefanocoding.me/license.txt
-	========================================================================
+	Licensed under AGPL-3.0 (https://hans5958.github.io/place-catalog/license.txt)
 -->
 
 <!DOCTYPE html>
@@ -49,7 +43,7 @@
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
 		<link rel="manifest" href="./manifest.webmanifest">
-		
+		<script type="module" src="https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate/dist/pwa-update.js"></script>
 		<script src="./_js/favicon.js" defer></script>
 	</head>
 	<body>
@@ -267,16 +261,12 @@
 		</template>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-		<script src="./_js/infoblock.js"></script>
-		<script src="./_js/time.js"></script>
-		<!-- <script src="./_js/pointInPolygon.js"></script> -->
-		<script src="./_js/atlas.js"></script>
-		<script src="./_js/view.js"></script>
-		<!-- <script src="./_js/overlap.js"></script>
-		<script src="./_js/polylabel.js"></script>
-		<script src="./_js/draw.js"></script> -->
-		<script src="./_js/main.js"></script>
-		<!-- <script src="./_js/stats.js"></script>
-		<script src="./_js/minified.js"></script> -->
+		<script src="./_js/config.js"></script>
+		<script src="./_js/main/infoblock.js"></script>
+		<script src="./_js/main/time.js"></script>
+		<script src="./_js/main/atlas.js"></script>
+		<script src="./_js/main/view.js"></script>
+		<script src="./_js/main/main.js"></script>
+		<pwa-update swpath="./sw.js"></pwa-update>
 	</body>
 </html>

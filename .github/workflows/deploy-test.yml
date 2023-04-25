@@ -1,3 +1,5 @@
+name: Site Deployment
+
 on:
   workflow_dispatch:
   push:
@@ -15,15 +17,17 @@ on:
   #     - .github/workflows/**
   #     - tools/ci/**
 
-name: Site Deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 permissions:
   contents: write
 
 jobs:
-  deploy:
-    name: Deployment/Testing
-    runs-on: ubuntu-18.04
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -31,7 +35,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x 
+          node-version: 18.x
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
@@ -54,9 +58,22 @@ jobs:
             cp -r web/ dist/;
           fi
 
-      - name: Deploy site
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload GH Pages artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/
-          force_orphan: true
+          path: dist/
+
+  deploy:
+    name: Deployment
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

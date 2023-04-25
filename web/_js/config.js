@@ -1,18 +1,30 @@
-/*
-	========================================================================
-	The 2022 r/place Catalog
-	The catalog of all canvas variations of r/place of 2022.
+// This script only applies to this instance of the Atlas.
+// Please also check code indicated with "@instance-only" outside this file.
+// TODO: Avoid having instance-only code inside the main scripts to make updating easier.
 
-	Copyright (c) 2017 Roland Rytz <roland@draemm.li>
-	Copyright (c) 2022 Place Atlas contributors
-	Copyright (c) 2022 Hans5958
+const prodDomain = "hans5958.github.io/place-catalog"
+window.prodDomain = prodDomain
 
-	Licensed under the GNU Affero General Public License Version 3
-	https://place-atlas.stefanocoding.me/license.txt
-	========================================================================
-*/
+const instanceId = "pc"
+window.instanceId = instanceId
 
-const entriesList = document.querySelector('#entriesList')
+const instanceSubreddit = "placeAtlas2"
+window.instanceSubreddit = instanceSubreddit
+
+const pageTitle = "The 2022 r/place Catalog"
+window.pageTitle = pageTitle
+
+const canvasSize = {
+	x: 2000,
+	y: 2000
+}
+window.canvasSize = canvasSize
+
+const canvasCenter = {
+	x: canvasSize.x/2,
+	y: canvasSize.y/2
+}
+window.canvasCenter = canvasCenter
 
 const variationsConfig = {
 	default: {
@@ -75,7 +87,7 @@ const variationsConfig = {
 			{ "timestamp": 1648911600, "url": ["./_img/canvas/place30/049.png", "./_img/canvas/place30/051_049.png"] },
 			{ "timestamp": 1648913400, "url": ["./_img/canvas/place30/049.png", "./_img/canvas/place30/052_049.png"] },
 			{ "timestamp": 1648915200, "url": ["./_img/canvas/place30/049.png", "./_img/canvas/place30/053_049.png"] },
-			{ "timestamp": 1648917000, "url": ["./_img/canvas/place30/049.png", "./_img/canvas/place30/054_049.png"] },
+			{ "timestamp": ["First Expansion", 1648917000], "url": ["./_img/canvas/place30/049.png", "./_img/canvas/place30/054_049.png"] },
 			{ "timestamp": 1648918800, "url": ["./_img/canvas/place30/060.png", "./_img/canvas/place30/055_060.png"] },
 			{ "timestamp": 1648920600, "url": ["./_img/canvas/place30/060.png", "./_img/canvas/place30/056_060.png"] },
 			{ "timestamp": 1648922400, "url": ["./_img/canvas/place30/060.png", "./_img/canvas/place30/057_060.png"] },
@@ -129,7 +141,7 @@ const variationsConfig = {
 			{ "timestamp": 1649008800, "url": ["./_img/canvas/place30/104.png", "./_img/canvas/place30/105_104.png"] },
 			{ "timestamp": 1649010600, "url": ["./_img/canvas/place30/104.png", "./_img/canvas/place30/106_104.png"] },
 			{ "timestamp": 1649012400, "url": ["./_img/canvas/place30/104.png", "./_img/canvas/place30/107_104.png"] },
-			{ "timestamp": 1649014200, "url": ["./_img/canvas/place30/104.png", "./_img/canvas/place30/108_104.png"] },
+			{ "timestamp": ["Second Expansion", 1649014200], "url": ["./_img/canvas/place30/104.png", "./_img/canvas/place30/108_104.png"] },
 			{ "timestamp": 1649016000, "url": ["./_img/canvas/place30/104.png", "./_img/canvas/place30/109_104.png"] },
 			{ "timestamp": 1649017800, "url": ["./_img/canvas/place30/115.png", "./_img/canvas/place30/110_115.png"] },
 			{ "timestamp": 1649019600, "url": ["./_img/canvas/place30/115.png", "./_img/canvas/place30/111_115.png"] },
@@ -636,254 +648,22 @@ The image shows the color which has accumulated the longest screen time up until
 		}
 	},
 }
+window.variationsConfig = variationsConfig
 
-const codeReference = {}
-const imageCache = {}
+let defaultVariation = 'default'
+window.defaultVariation = defaultVariation
 
-const variantsEl = document.getElementById("variants")
+let defaultPeriod = variationsConfig[defaultVariation].default
+window.defaultPeriod = defaultPeriod
 
-for (const variation in variationsConfig) {
-	const optionEl = document.createElement('option')
-	variantsEl.appendChild(optionEl)
-	optionEl.textContent = variationsConfig[variation].name
-	if (variation.startsWith('#')) {
-		optionEl.disabled = true
-		optionEl.classList.add('fw-bold', 'fst-italic')
-		continue
-	}
-	codeReference[variationsConfig[variation].code] = variation
-	codeReference[variation] = variation
-	optionEl.value = variation
-}
+const useNumericalId = false
+window.useNumericalId = useNumericalId
 
-const timelineSlider = document.getElementById("timeControlsSlider")
-const timelineList = document.getElementById("timeControlsList")
-const tooltip = document.getElementById("timeControlsTooltip")
-const image = document.getElementById("image")
-let abortController = new AbortController()
-let currentUpdateIndex = 0
-let updateTimeout = setTimeout(null, 0)
-let tooltipDelayHide = setTimeout(null, 0)
+console.info(`%cThe 2022 r/place Catalog
+%cCopyright (c) 2017 Roland Rytz <roland@draemm.li>
+Copyright (c) 2022 Place Atlas contributors
+Copyright (c) 2022 Hans5958
+Licensed under AGPL-3.0 (https://hans5958.github.io/place-catalog/license.txt)
 
-let currentVariation = "default"
-const defaultPeriod = variationsConfig[currentVariation].default
-const defaultVariation = currentVariation
-let currentPeriod = defaultPeriod
-window.currentPeriod = currentPeriod
-window.currentVariation = currentVariation
-buildObjectsList(variationsConfig[currentVariation], currentVariation)
-
-// SETUP
-timelineSlider.max = variationsConfig[currentVariation].versions.length - 1
-timelineSlider.value = currentPeriod
-timelineList.children[0].value = defaultPeriod
-
-timelineSlider.addEventListener("input", (event) => {
-	updateTooltip(parseInt(event.target.value), currentVariation)
-	clearTimeout(updateTimeout)
-	updateTimeout = setTimeout(() => {
-		updateTime(parseInt(timelineSlider.value), currentVariation)
-		setTimeout(() => {
-			if (timelineSlider.value != currentPeriod && abortController.signal.aborted) {
-				updateTime(parseInt(timelineSlider.value), currentVariation)
-			}
-		}, 50)
-	}, 25)
-})
-
-variantsEl.addEventListener("input", (event) => {
-	updateTime(-1, event.target.value)
-})
-
-const dispatchTimeUpdateEvent = (period = timelineSlider.value) => {
-	const timeUpdateEvent = new CustomEvent('timeupdate', {
-		detail: {
-			period: period
-		}
-	})
-	document.dispatchEvent(timeUpdateEvent)
-}
-
-async function updateBackground(newPeriod = currentPeriod, newVariation = currentVariation) {
-	abortController.abort()
-	abortController = new AbortController()
-	currentUpdateIndex++
-	const myUpdateIndex = currentUpdateIndex
-	const variationConfig = variationsConfig[newVariation]
-
-	variantsEl.value = currentVariation
-	if (variationConfig.icon) {
-		variantsEl.previousElementSibling.innerHTML = variationConfig.icon
-		variantsEl.previousElementSibling.classList.remove('d-none')
-		variantsEl.parentElement.classList.add('input-group')
-	} else {
-		variantsEl.previousElementSibling.innerHTML = ""
-		variantsEl.previousElementSibling.classList.add('d-none')
-		variantsEl.parentElement.classList.remove('input-group')
-	}
-
-
-	const configObject = variationConfig.versions[currentPeriod]
-	if (typeof configObject.url === "string") {
-		if (imageCache[configObject.url] === undefined) {
-			const fetchResult = await fetch(configObject.url, {
-				signal: abortController.signal
-			})
-			if (currentUpdateIndex !== myUpdateIndex) {
-				return [configObject, newPeriod, newVariation]
-			}
-			const imageBlob = await fetchResult.blob()
-			imageCache[configObject.url] = URL.createObjectURL(imageBlob)
-		}
-		image.src = imageCache[configObject.url]
-	} else {
-		const canvas = document.createElement('canvas')
-		const context = canvas.getContext('2d')
-		context.canvas.width = 2000
-		context.canvas.height = 2000
-		await Promise.all(configObject.url.map(async url => {
-			if (imageCache[url] === undefined) {
-				const fetchResult = await fetch(url, {
-					signal: abortController.signal
-				})
-				if (currentUpdateIndex !== myUpdateIndex) {
-					return
-				}
-				const imageBlob = await fetchResult.blob()
-				imageCache[url] = URL.createObjectURL(imageBlob)
-			}
-		}))
-		for await (const url of configObject.url) {
-			const imageLayer = new Image()
-			await new Promise(resolve => {
-				imageLayer.onload = () => {
-					context.drawImage(imageLayer, 0, 0)
-					resolve()
-				}
-				imageLayer.src = imageCache[url]
-			})
-		}
-
-		if (currentUpdateIndex !== myUpdateIndex) return [configObject, newPeriod, newVariation]
-		const blob = await new Promise(resolve => canvas.toBlob(resolve))
-		image.src = URL.createObjectURL(blob)
-	}
-}
-
-async function updateTime(newPeriod = currentPeriod, newVariation = currentVariation, forcePeriod = false) {
-	document.body.dataset.canvasLoading = ""
-
-	if (!variationsConfig[newVariation]) newVariation = defaultVariation
-	const variationConfig = variationsConfig[newVariation]
-
-	if (newPeriod < 0) newPeriod = 0
-	else if (newPeriod > variationConfig.versions.length - 1) newPeriod = variationConfig.versions.length - 1
-
-	currentPeriod = newPeriod
-	if (currentVariation !== newVariation) {
-		currentVariation = newVariation
-		timelineSlider.max = variationConfig.versions.length - 1
-		if (!forcePeriod) {
-			currentPeriod = variationConfig.default
-			newPeriod = currentPeriod
-		}
-		if (variationConfig.versions.length === 1) bottomBar.classList.add('no-time-slider')
-		else bottomBar.classList.remove('no-time-slider')
-		buildObjectsList(variationConfig, currentVariation)
-	}
-	timelineSlider.value = currentPeriod
-	updateTooltip(newPeriod, newVariation)
-
-	await updateBackground(newPeriod, newVariation)
-
-	dispatchTimeUpdateEvent(newPeriod)
-	delete document.body.dataset.canvasLoading
-	tooltip.dataset.forceVisible = ""
-	clearTimeout(tooltipDelayHide)
-	tooltipDelayHide = setTimeout(() => {
-		delete tooltip.dataset.forceVisible
-	}, 1000)
-
-}
-
-function updateTooltip(newPeriod, newVariation) {
-	const configObject = variationsConfig[newVariation].versions[newPeriod]
-
-	// If timestap is a number return a UTC formatted date otherwise use exact timestap label
-	if (Array.isArray(configObject.timestamp)) {
-		tooltip.querySelector('div').textContent = ""
-		configObject.timestamp.forEach(timestamp => {
-			if (tooltip.querySelector('div').textContent) tooltip.querySelector('div').innerHTML += "<br />"
-			if (typeof timestamp === "number") tooltip.querySelector('div').innerHTML += new Date(timestamp * 1000).toUTCString()
-			else tooltip.querySelector('div').innerHTML += timestamp
-		})
-	} else if (typeof configObject.timestamp === "number") tooltip.querySelector('div').textContent = new Date(configObject.timestamp * 1000).toUTCString()
-	else tooltip.querySelector('div').textContent = configObject.timestamp
-
-	// Clamps position of tooltip to prevent from going off screen
-	const timelineSliderRect = timelineSlider.getBoundingClientRect()
-	let min = -timelineSliderRect.left + 12
-	let max = (window.innerWidth - tooltip.offsetWidth) - timelineSliderRect.left + 4
-	tooltip.style.left = Math.min(Math.max((timelineSlider.offsetWidth) * (timelineSlider.value) / (timelineSlider.max) - tooltip.offsetWidth / 2, min), max) + "px"
-}
-
-tooltip.parentElement.addEventListener('mouseenter', () => updateTooltip(parseInt(timelineSlider.value), currentVariation))
-
-window.addEventListener('resize', () => updateTooltip(parseInt(timelineSlider.value), currentVariation))
-
-function isOnPeriod(start, end, variation, currentPeriod, currentVariation) {
-	if (start > end) [start, end] = [end, start]
-	return currentPeriod >= start && currentPeriod <= end && variation === currentVariation
-}
-
-function parsePeriod(periodString) {
-	let variation = defaultVariation
-	periodString = periodString + ""
-	if (periodString.split(':').length > 1) {
-		const split = periodString.split(':')
-		variation = codeReference[split[0]]
-		periodString = split[1]
-	}
-	if (periodString.search('-') + 1) {
-		let [start, end] = periodString.split('-').map(i => parseInt(i))
-		if (start > end) [start, end] = [end, start]
-		return [start, end, variation]
-	} else if (codeReference[periodString]) {
-		variation = codeReference[periodString]
-		const defaultPeriod = variationsConfig[variation].default
-		return [defaultPeriod, defaultPeriod, variation]
-	} else {
-		const periodNew = parseInt(periodString)
-		return [periodNew, periodNew, variation]
-	}
-}
-
-function formatPeriod(start, end, variation) {
-	let periodString, variationString
-	variationString = variationsConfig[variation].code
-	if (start > end) [start, end] = [end, start]
-	if (start === end) {
-		if (start === variationsConfig[variation].default && variation !== defaultVariation) {
-			periodString = ""
-		}
-		else periodString = start
-	}
-	else periodString = start + "-" + end
-	if (periodString && variationString) return variationsConfig[variation].code + ":" + periodString
-	if (variationString) return variationString
-	return periodString
-}
-
-function buildObjectsList(variationConfig, id) {
-
-	const entry = {
-		name: variationConfig.name,
-		links: {},
-		id,
-		...variationConfig.info
-	}
-	const element = createInfoBlock(entry)
-	entriesList.replaceChildren(element)
-
-}
-
+To get the image of the canvas, use downloadCanvas().
+`, 'font-size: 150%; line-height: 150%', '')
