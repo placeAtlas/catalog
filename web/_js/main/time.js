@@ -12,6 +12,7 @@ let canvasUrl = ""
 const variantsEl = document.getElementById("variants")
 
 for (const variation in variationsConfig) {
+	codeReference[variationsConfig[variation].code] = variation
 	const optionEl = document.createElement('option')
 	variantsEl.appendChild(optionEl)
 	optionEl.textContent = variationsConfig[variation].name
@@ -23,6 +24,8 @@ for (const variation in variationsConfig) {
 	codeReference[variationsConfig[variation].code] = variation
 	codeReference[variation] = variation
 	optionEl.value = variation
+	optionEl.textContent = variationsConfig[variation].name
+	variantsEl.appendChild(optionEl)
 }
 
 const timelineSlider = document.getElementById("timeControlsSlider")
@@ -113,18 +116,20 @@ async function updateBackground(newPeriod = currentPeriod, newVariation = curren
 	}
 	const canvas = document.createElement('canvas')
 	const context = canvas.getContext('2d')
-	for await (const url of layerUrls) {
+
+	layers.length = layerUrls.length 
+	await Promise.all(layerUrls.map(async (url, i) => {
 		const imageLayer = new Image()
 		await new Promise(resolve => {
 			imageLayer.onload = () => {
 				context.canvas.width = Math.max(imageLayer.width, context.canvas.width)
 				context.canvas.height = Math.max(imageLayer.height, context.canvas.height)
-				layers.push(imageLayer)
+				layers[i] = imageLayer
 				resolve()
 			}
 			imageLayer.src = url
 		})
-	}
+	}))
 
 	for (const imageLayer of layers) {
 		context.drawImage(imageLayer, 0, 0)
@@ -137,6 +142,9 @@ async function updateBackground(newPeriod = currentPeriod, newVariation = curren
 }
 
 async function updateTime(newPeriod = currentPeriod, newVariation = currentVariation, forceLoad = false) {
+	if (newPeriod === currentPeriod && !forceLoad) {
+		return;
+	}
 	document.body.dataset.canvasLoading = ""
 
 	const oldPeriod = currentPeriod

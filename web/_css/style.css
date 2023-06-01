@@ -104,10 +104,10 @@ body[data-mode]:not([data-mode="draw"]) #drawNavButtons, [data-mode="draw"] #def
 }
 
 #innerContainer {
-	height: 2000px;
-	width: 2000px;
-	position: absolute;
-	z-index: -2000;
+    height: 2000px;
+    width: 2000px;
+    position: absolute;
+    z-index: -2000;
 }
 
 body[data-init-done] .listTransitioning #innerContainer {
@@ -120,22 +120,21 @@ body[data-init-done] .listTransitioning #innerContainer {
 	}
 }
 
-#image {
+#innerContainer > * {
 	position: absolute;
 	height: 100%;
 	width: 100%;
-	z-index: -1500;
 	image-rendering: -webkit-optimize-contrast;
 	image-rendering: pixelated;
+	user-select: none;
+}
+
+#image {
+	z-index: -1500;
 }
 
 #highlightCanvas {
 	z-index: -1200;
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	image-rendering: -webkit-optimize-contrast;
-	image-rendering: pixelated;
 }
 
 #atlasSize:empty {
@@ -260,7 +259,7 @@ body[data-init-done] .listTransitioning #innerContainer {
 }
 
 #variantControls {
-	flex: 1 1 auto;
+	flex: 1 0 auto;
 }
 
 #timeControls {
@@ -374,7 +373,7 @@ body[data-init-done] #timeControlsTooltip[data-force-visible] {
 }
 
 [data-mode="explore"] #entriesListControls {
-	display: none;
+    display: none;
 }
 
 body:not([data-dev]) .show-only-on-dev {
@@ -435,6 +434,16 @@ body:not([data-dev]) .show-only-on-dev {
 .period-group.no-time-slider input,
 .period-group.no-time-slider .period-input-controls {
 	display: none !important;
+}
+
+/* about.html */
+
+#credits a {
+	text-decoration: none;
+}
+
+#credits a:hover {
+	text-decoration: underline;
 }
 
 /* purgecss end ignore */
