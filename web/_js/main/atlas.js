@@ -6,7 +6,7 @@
  * Licensed under AGPL-3.0 (https://hans5958.github.io/place-catalog/license.txt)
  */
 
-window.addEventListener("error", function (e) {
+window.addEventListener("error", e => {
 	console.error(e)
 	let errorMessage = "<h4 class=\"mb-3\">An error has occurred:</h4>"
 	errorMessage += "<p class=\"text-danger\">" + e.message + "</p>"

@@ -41,7 +41,6 @@ let currentVariation = defaultVariation
 let currentPeriod = defaultPeriod
 window.currentVariation = currentVariation
 window.currentPeriod = currentPeriod
-buildObjectsList()
 
 // SETUP
 if (variationsConfig[currentVariation].versions.length === 1) bottomBar.classList.add('no-time-slider')
@@ -81,7 +80,7 @@ const dispatchTimeUpdateEvent = (period = currentPeriod, variation = currentVari
 		detail: {
 			period: period,
 			variation: variation,
-			periodString: formatPeriod(period, period, variation),
+			periodString: formatPeriod(period, null, variation),
 		}
 	})
 	document.dispatchEvent(timeUpdateEvent)
@@ -89,7 +88,8 @@ const dispatchTimeUpdateEvent = (period = currentPeriod, variation = currentVari
 
 async function updateBackground(newPeriod = currentPeriod, newVariation = currentVariation) {
 	abortController.abort()
-	abortController = new AbortController()
+	const myAbortController = new AbortController()
+	abortController = myAbortController
 	currentUpdateIndex++
 	const myUpdateIndex = currentUpdateIndex
 	const variationConfig = variationsConfig[newVariation]
@@ -105,7 +105,7 @@ async function updateBackground(newPeriod = currentPeriod, newVariation = curren
 		variantsEl.parentElement.classList.remove('input-group')
 	}
 
-	const configObject = variationConfig.versions[currentPeriod]
+	const configObject = variationConfig.versions[newPeriod]
 	let layerUrls = []
 	let layers = []
 
@@ -119,35 +119,60 @@ async function updateBackground(newPeriod = currentPeriod, newVariation = curren
 
 	layers.length = layerUrls.length 
 	await Promise.all(layerUrls.map(async (url, i) => {
-		const imageLayer = new Image()
-		await new Promise(resolve => {
-			imageLayer.onload = () => {
-				context.canvas.width = Math.max(imageLayer.width, context.canvas.width)
-				context.canvas.height = Math.max(imageLayer.height, context.canvas.height)
-				layers[i] = imageLayer
-				resolve()
-			}
-			imageLayer.src = url
-		})
+		try {
+			const imageBlob = await (await fetch(url, { signal: myAbortController.signal })).blob()
+			const imageLayer = new Image()
+			await new Promise(resolve => {
+				imageLayer.onload = () => {
+					context.canvas.width = Math.max(imageLayer.width, context.canvas.width)
+					context.canvas.height = Math.max(imageLayer.height, context.canvas.height)
+					layers[i] = imageLayer
+					resolve()
+				}
+				imageLayer.src = URL.createObjectURL(imageBlob)
+			})
+		} catch (e) {
+			const aborted = myAbortController.signal.aborted
+			if (!aborted) throw e
+		}
 	}))
+
+	if (currentUpdateIndex !== myUpdateIndex) {
+		return false
+	}
 
 	for (const imageLayer of layers) {
 		context.drawImage(imageLayer, 0, 0)
 	}
-
-	if (currentUpdateIndex !== myUpdateIndex) return [configObject, newPeriod, newVariation]
 	const blob = await new Promise(resolve => canvas.toBlob(resolve))
 	canvasUrl = URL.createObjectURL(blob)
 	image.src = canvasUrl
+
+	return true
+
 }
 
+let loadingTimeout = setTimeout(() => {}, 0)
+
 async function updateTime(newPeriod = currentPeriod, newVariation = currentVariation, forceLoad = false) {
-	if (newPeriod === currentPeriod && !forceLoad) {
-		return;
+	if (newPeriod === currentPeriod && newVariation === currentVariation && !forceLoad) {
+		return
 	}
 	document.body.dataset.canvasLoading = ""
 
-	const oldPeriod = currentPeriod
+	const loadingEl = document.getElementById("loading")
+	const previouslyHidden = loadingEl.classList.contains("d-none")
+
+	if (previouslyHidden) loadingEl.classList.add("opacity-0", "transition-opacity")
+	clearTimeout(loadingTimeout)
+	loadingTimeout = setTimeout(() => {
+		loadingEl.classList.remove("d-none")
+		if (previouslyHidden) setTimeout(() => {
+			loadingEl.classList.remove("opacity-0")	
+		}, 0)
+	}, 2000)
+	
+	// const oldPeriod = currentPeriod
 	const oldVariation = currentVariation
 
 	if (!variationsConfig[newVariation]) newVariation = defaultVariation
@@ -167,15 +192,20 @@ async function updateTime(newPeriod = currentPeriod, newVariation = currentVaria
 		}
 		if (variationConfig.versions.length === 1) bottomBar.classList.add('no-time-slider')
 		else bottomBar.classList.remove('no-time-slider')
-		buildObjectsList()
 	}
 	timelineSlider.value = currentPeriod
 	updateTooltip(newPeriod, newVariation)
 
-	await updateBackground(newPeriod, newVariation)
+	const updateBackgroundResult = await updateBackground(newPeriod, newVariation)
+
+	if (!updateBackgroundResult) return
 
 	dispatchTimeUpdateEvent(newPeriod, newVariation)
 	delete document.body.dataset.canvasLoading
+	clearTimeout(loadingTimeout)
+	document.getElementById("loading").classList.add("d-none")
+	document.getElementById("loading").classList.remove("opacity-0", "opacity-100", "transition-opacity")
+	
 	tooltip.dataset.forceVisible = ""
 	clearTimeout(tooltipDelayHide)
 	tooltipDelayHide = setTimeout(() => {
@@ -213,6 +243,7 @@ function isOnPeriod(start, end, variation, currentPeriod, currentVariation) {
 	if (start > end) [start, end] = [end, start]
 	return currentPeriod >= start && currentPeriod <= end && variation === currentVariation
 }
+window.isOnPeriod = isOnPeriod
 
 function parsePeriod(periodString) {
 	let variation = defaultVariation
@@ -222,7 +253,11 @@ function parsePeriod(periodString) {
 		variation = codeReference[split[0]]
 		periodString = split[1]
 	}
-	if (codeReference[periodString]) {
+	if (periodString.search('-') + 1) {
+		let [start, end] = periodString.split('-').map(i => parseInt(i))
+		if (start > end) [start, end] = [end, start]
+		return [start, end, variation]
+	} else if (codeReference[periodString]) {
 		variation = codeReference[periodString]
 		const defaultPeriod = variationsConfig[variation].default
 		return [defaultPeriod, defaultPeriod, variation]
@@ -232,34 +267,50 @@ function parsePeriod(periodString) {
 	}
 }
 
-function formatPeriod(start, end, variation) {
-	start ??= currentPeriod
-	end ??= currentPeriod
-	variation ??= currentVariation
+function formatPeriod(targetStart, targetEnd, targetVariation, forUrl = false) {
+	targetStart ??= currentPeriod
+	targetEnd ??= targetStart
+	targetVariation ??= currentVariation
 
 	let periodString, variationString
-	variationString = variation
-	if (start > end) [start, end] = [end, start]
-	if (start === end) {
-		if (start === variationsConfig[variation].default && variation !== defaultVariation) {
+	variationString = variationsConfig[targetVariation].code
+	if (targetStart > targetEnd) [targetStart, targetEnd] = [targetEnd, targetStart]
+	if (targetStart === targetEnd) {
+		if (forUrl && targetVariation === defaultVariation && targetStart === variationsConfig[defaultVariation].default) {
 			periodString = ""
 		}
-		else periodString = start
+		else periodString = targetStart
 	}
-	else periodString = start + "-" + end
-	if (periodString && variationString) return variationsConfig[variation].code + ":" + periodString
+	else periodString = targetStart + "-" + targetEnd
+	if (periodString && variationString) return variationsConfig[targetVariation].code + ":" + periodString
 	if (variationString) return variationString
+
 	return periodString
 }
 
-function formatHash(id, start, end, variation) {
-	start ??= currentPeriod
-	end ??= currentPeriod
-	variation ??= currentVariation
+function setReferenceVal(reference, newValue) {
+	if (reference === false || reference === "") return null
+	else return reference ?? newValue
+}
+
+function formatHash(targetPeriod, targetVariation, targetX, targetY, targetZoom) {
+	let hashData = window.location.hash.substring(1).split('/')
+
+	targetPeriod = setReferenceVal(targetPeriod, currentPeriod)
+	targetVariation = setReferenceVal(targetVariation, currentVariation)
+	targetX = setReferenceVal(targetX, canvasCenter.x - scaleZoomOrigin[0])
+	targetY = setReferenceVal(targetY, canvasCenter.y - scaleZoomOrigin[1])
+	targetZoom = setReferenceVal(targetZoom, zoom)
 	
-	const targetPeriod = formatPeriod(start, end, variation)
-	if (targetPeriod && targetPeriod !== defaultPeriod) return '#' + targetPeriod
-	return ''
+	if (targetX) targetX = Math.round(targetX)
+	if (targetY) targetY = Math.round(targetY)
+	if (targetZoom) targetZoom = targetZoom.toFixed(3).replace(/\.?0+$/, '')
+
+	const result = []
+	const targetPeriodFormat = formatPeriod(targetPeriod, null, targetVariation, true)
+	result.push(targetPeriodFormat, targetX, targetY, targetZoom)
+	if (!result.some(el => el || el === 0)) return ''
+	return '#' + result.join('/').replace(/\/+$/, '')
 }
 
 function downloadCanvas() {
@@ -270,19 +321,4 @@ function downloadCanvas() {
 	document.body.appendChild(linkEl)
 	linkEl.click()
 	document.body.removeChild(linkEl)
-}
-
-function buildObjectsList(id = currentVariation) {
-
-	const variationConfig = variationsConfig[id]
-
-	const entry = {
-		name: variationConfig.name,
-		links: {},
-		id,
-		...variationConfig.info
-	}
-	const element = createInfoBlock(entry)
-	entriesList.replaceChildren(element)
-
 }

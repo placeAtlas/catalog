@@ -1,5 +1,5 @@
 // This script only applies to this instance of the Atlas.
-// Please also check code indicated with "@instance-only" outside this file.
+// Please also check code indicated with "@instanceonly" outside this file.
 // TODO: Avoid having instance-only code inside the main scripts to make updating easier.
 
 const prodDomain = "hans5958.github.io/place-catalog"
@@ -11,6 +11,9 @@ window.instanceId = instanceId
 const instanceSubreddit = "placeAtlas2"
 window.instanceSubreddit = instanceSubreddit
 
+const instanceRepo = "https://github.com/Hans5958/place-catalog"
+window.instanceRepo = instanceRepo
+
 const pageTitle = "The 2022 r/place Catalog"
 window.pageTitle = pageTitle
 
@@ -20,9 +23,15 @@ const canvasSize = {
 }
 window.canvasSize = canvasSize
 
+const canvasOffset = {
+	x: 0,
+	y: 0
+}
+window.canvasOffset = canvasOffset
+
 const canvasCenter = {
-	x: canvasSize.x/2,
-	y: canvasSize.y/2
+	x: canvasSize.x/2 + canvasOffset.x,
+	y: canvasSize.y/2 + canvasOffset.y
 }
 window.canvasCenter = canvasCenter
 

@@ -31,6 +31,7 @@ svg.icon {
 body[data-mode] {
 	overflow: hidden;
 	background-color: #111;
+	touch-action: none;
 }
 
 #wrapper {
@@ -50,6 +51,14 @@ body[data-mode] {
 .offcanvas {
 	top: 3.7rem !important;
 	padding-left: env(safe-area-inset-left);
+}
+
+.opacity-0 {
+	opacity: 0;
+}
+
+.transition-opacity {
+	transition: opacity .15s linear;
 }
 
 @supports (backdrop-filter: blur()) or (-webkit-backdrop-filter: blur()) {
@@ -83,7 +92,6 @@ body[data-mode]:not([data-mode="draw"]) #drawNavButtons, [data-mode="draw"] #def
 	width: calc(100% - 400px);
 	height: 100%;
 	margin-left: 400px;
-	touch-action: manipulation;
 	overflow: hidden;
 }
 

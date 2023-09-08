@@ -8,12 +8,9 @@
 
 const innerContainer = document.getElementById("innerContainer")
 const container = document.getElementById("container")
-const highlightCanvas = document.getElementById("highlightCanvas")
 const imageCanvas = document.getElementById('image')
 const highlightContext = highlightCanvas.getContext("2d")
 
-highlightCanvas.width = canvasSize.x
-highlightCanvas.height = canvasSize.y
 imageCanvas.width = canvasSize.x
 imageCanvas.height = canvasSize.y
 
@@ -24,10 +21,10 @@ if (window.devicePixelRatio) {
 }
 
 const maxZoom = 128
-const minZoom = 0.1
+const minZoom = 0.125
 
 let zoomOrigin = [0, 0]
-let scaleZoomOrigin = [0, 0]
+let scaleZoomOrigin = [canvasCenter.x, canvasCenter.y]
 
 let dragging = false
 let lastPosition = [0, 0]
@@ -40,18 +37,39 @@ function applyView() {
 	//console.log(zoomOrigin, scaleZoomOrigin)
 	//console.log(scaleZoomOrigin[0])
 
-	scaleZoomOrigin[0] = Math.max(-canvasCenter.x, Math.min(canvasCenter.x, scaleZoomOrigin[0]))
-	scaleZoomOrigin[1] = Math.max(-canvasCenter.y, Math.min(canvasCenter.y, scaleZoomOrigin[1]))
+	scaleZoomOrigin[0] = Math.max(-canvasCenter.x + canvasOffset.x, Math.min(canvasCenter.x - canvasOffset.x, scaleZoomOrigin[0]))
+	scaleZoomOrigin[1] = Math.max(-canvasCenter.y + canvasOffset.y, Math.min(canvasCenter.y - canvasOffset.y, scaleZoomOrigin[1]))
+	zoom = Math.max(minZoom, Math.min(maxZoom, zoom))
 
 	zoomOrigin = [scaleZoomOrigin[0] * zoom, scaleZoomOrigin[1] * zoom]
 
-	innerContainer.style.height = (~~(zoom * canvasSize.x)) + "px"
-	innerContainer.style.width = (~~(zoom * canvasSize.y)) + "px"
+	innerContainer.style.width = (~~(zoom * canvasSize.x)) + "px"
+	innerContainer.style.height = (~~(zoom * canvasSize.y)) + "px"
 
 	innerContainer.style.left = ~~(container.clientWidth / 2 - innerContainer.clientWidth / 2 + zoomOrigin[0] + container.offsetLeft) + "px"
 	innerContainer.style.top = ~~(container.clientHeight / 2 - innerContainer.clientHeight / 2 + zoomOrigin[1] + container.offsetTop) + "px"
 
 }
+
+function setView(targetX, targetY, targetZoom) {
+	
+	if (isNaN(targetX)) targetX = null
+	if (isNaN(targetY)) targetY = null
+
+	zoom = targetZoom ?? zoom
+	if ((targetX ?? null) !== null) scaleZoomOrigin[0] = canvasCenter.x - targetX
+	if ((targetY ?? null) !== null) scaleZoomOrigin[1] = canvasCenter.y - targetY
+
+	applyView()
+
+}
+
+function updateHash(...args) {
+	const newLocation = new URL(window.location)
+	newLocation.hash = formatHash(...args)
+	if (location.hash !== newLocation.hash) history.replaceState({}, "", newLocation)
+}
+
 if (document.location.host !== prodDomain) document.body.dataset.dev = ""
 
 init()
@@ -61,10 +79,10 @@ async function init() {
 	let mode = "explore"
 
 	const hash = window.location.hash.substring(1)
-	const [period] = hash.split('/')
+	const [hashPeriod, hashX, hashY, hashZoom] = hash.split('/')
 
-	if (period) {
-		const [, targetPeriod, targetVariation] = parsePeriod(period)
+	if (hashPeriod) {
+		const [, targetPeriod, targetVariation] = parsePeriod(hashPeriod)
 		await updateTime(targetPeriod, targetVariation, true)
 	} else {
 		await updateTime(currentPeriod, currentVariation, true)
@@ -72,15 +90,18 @@ async function init() {
 
 	//console.log(document.documentElement.clientWidth, document.documentElement.clientHeight)
 
-	zoomOrigin = [0, 0]
-	applyView()
+	setView(
+		(isNaN(hashX) || hashX === '') ? canvasCenter.x : Number(hashX), 
+		(isNaN(hashY) || hashY === '') ? canvasCenter.y : Number(hashY), 
+		(isNaN(hashZoom) || hashZoom === '') ? zoom : Number(hashZoom)
+	)
 
 	let initialPinchDistance = 0
 	let initialPinchZoom = 0
 	let initialPinchZoomOrigin = [0, 0]
 
-	let desiredZoom
-	let zoomAnimationFrame
+	// let desiredZoom
+	// let zoomAnimationFrame
 
 	document.body.dataset.mode = mode
 
@@ -141,7 +162,7 @@ async function init() {
 		zoom = 1
 		zoomOrigin = [0, 0]
 		scaleZoomOrigin = [0, 0]
-		applyView()
+			applyView()
 	})
 
 	container.addEventListener("dblclick", e => {
@@ -203,6 +224,7 @@ async function init() {
 
 		zoom = Math.max(minZoom, Math.min(maxZoom, zoom))
 		applyZoom(x, y, zoom)
+		updateHash()
 	}, { passive: true })
 
 	/*function setDesiredZoom(x, y, target){
@@ -259,8 +281,8 @@ async function init() {
 			]
 
 			mousedown(
-				(e.touches[0].clientX + e.touches[1].clientX) / 2,
-				(e.touches[0].clientY + e.touches[1].clientY) / 2
+				(e.touches[0].clientX + e.touches[1].clientX) / 2 - container.offsetLeft,
+				(e.touches[0].clientY + e.touches[1].clientY) / 2 - container.offsetTop
 			)
 
 		}
@@ -273,6 +295,7 @@ async function init() {
 			e.preventDefault()
 		}
 	})
+
 	window.addEventListener("touchmove", e => {
 
 		if (e.touches.length === 2 || e.scale > 1) {
@@ -299,8 +322,7 @@ async function init() {
 		scaleZoomOrigin[0] += deltaX / zoom
 		scaleZoomOrigin[1] += deltaY / zoom
 
-		updateLines()
-		applyView()
+			applyView()
 	}
 
 	function touchmove(e) {
@@ -342,10 +364,10 @@ async function init() {
 		zoomOrigin[1] = scaleZoomOrigin[1] * zoom
 
 		applyView()
-	}
+		}
 
-	window.addEventListener("mouseup", function (e) {
-		container.style.cursor = "default"
+	window.addEventListener("mouseup", e => {
+		container.style.cursor = "pointer"
 		if (dragging) {
 			e.preventDefault()
 		}
@@ -353,17 +375,15 @@ async function init() {
 	})
 	window.addEventListener("touchend", touchend)
 
-	function mouseup(x, y) {
-		if (dragging) {
-			dragging = false
-		}
+	function mouseup() {
+		dragging = false
+		updateHash()
 	}
 
 	function touchend(e) {
-
 		if (e.touches.length === 0) {
-
 			mouseup()
+					dragging = false
 
 		} else if (e.touches.length === 1) {
 			initialPinchZoom = zoom
@@ -381,3 +401,19 @@ async function init() {
 	document.body.dataset.initDone = ''
 
 }
+
+// Announcement system
+
+const announcementEl = document.querySelector("#headerAnnouncement")
+const announcementButton = announcementEl.querySelector('[role=button]')
+const announcementText = announcementEl.querySelector('p').textContent.trim()
+
+if (announcementText && announcementText !== window.localStorage.getItem('announcement-closed')) {
+	announcementButton.click()
+	document.querySelector('#objectsList').style.marginTop = '2.8rem'
+}
+
+announcementEl.querySelector('[role=button]').addEventListener('click', () => {
+	window.localStorage.setItem('announcement-closed', announcementText)
+	document.querySelector('#objectsList').style.marginTop = '0'
+})

@@ -32,7 +32,7 @@ function createInfoListItem(name, value) {
 	return entryInfoListElement
 }
 
-function createInfoBlock(entry, isPreview) {
+function createInfoBlock(entry) {
 	const element = document.createElement("div")
 	element.className = "card mb-2 overflow-hidden shadow"
 
@@ -41,14 +41,21 @@ function createInfoBlock(entry, isPreview) {
 
 	const linkElement = document.createElement("a")
 	linkElement.className = "text-decoration-none d-flex justify-content-between text-body"
-	linkElement.href = formatHash(entry.id)
-	
+
+	const hash = formatHash()
+	linkElement.href = hash
+	linkElement.addEventListener('click', e => {
+		e.preventDefault()
+		location.hash = hash
+		window.dispatchEvent(new HashChangeEvent("hashchange"))
+	})
+
 	const linkNameElement = document.createElement("span")
 	linkNameElement.className = "flex-grow-1 text-break"
 	linkNameElement.textContent = entry.name
 	headerElement.appendChild(linkElement)
 	linkElement.appendChild(linkNameElement)
-	linkElement.insertAdjacentHTML("beforeend", '<i class="bi bi-link-45deg align-self-center link-primary" aria-hidden="true"></i>')
+	linkElement.insertAdjacentHTML("beforeend", '<i class="bi bi-link-45deg align-self-center link-primary" aria-hidden="true" title="Copy direct link"></i>')
 	element.appendChild(headerElement)
 
 	const bodyElement = document.createElement("div")
@@ -126,7 +133,7 @@ function createInfoBlock(entry, isPreview) {
 			if (!link) return
 			const wikiLinkElement = baseLinkElement.cloneNode()
 			wikiLinkElement.href = "https://place-wiki.stefanocoding.me/wiki/" + link.replace(/ /g, '_')
-			wikiLinkElement.innerHTML = `<i class="bi bi-book" aria-hidden="true"></i>r/place Wiki Article`
+			wikiLinkElement.innerHTML = `<i class="bi bi-book" aria-hidden="true"></i> r/place Wiki Article`
 			wikiGroupElement.appendChild(wikiLinkElement)
 		})
 	}

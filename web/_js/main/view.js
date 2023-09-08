@@ -6,6 +6,9 @@
  * Licensed under AGPL-3.0 (https://hans5958.github.io/place-catalog/license.txt)
  */
 
+let previousScaleZoomOrigin
+let previousZoom
+
 const backgroundCanvas = document.createElement("canvas")
 backgroundCanvas.width = canvasSize.x
 backgroundCanvas.height = canvasSize.y
@@ -14,18 +17,12 @@ const backgroundContext = backgroundCanvas.getContext("2d")
 const wrapper = document.getElementById("wrapper")
 const bottomBar = document.getElementById("bottomBar")
 
+const showListButton = document.getElementById("showListButton")
 const offcanvasList = document.getElementById("offcanvasList")
-
-const objectsContainer = document.getElementById("objectsList")
-const closeObjectsListButton = document.getElementById("closeObjectsListButton")
-const objectsListOverflowNotice = document.getElementById("objectsListOverflowNotice")
+const bsOffcanvasList = new bootstrap.Offcanvas(offcanvasList)
 
 const entriesList = document.getElementById("entriesList")
-
-const objectEditNav = document.createElement("a")
-objectEditNav.className = "btn btn-outline-primary"
-objectEditNav.id = "objectEditNav"
-objectEditNav.textContent = "Edit"
+let entriesListShown = false
 
 let lastPos = [0, 0]
 
@@ -42,7 +39,6 @@ offcanvasList.addEventListener('shown.bs.offcanvas', e => {
 	wrapper.classList.remove('listTransitioning')
 	updateHovering(e)
 	applyView()
-	render()
 })
 
 offcanvasList.addEventListener('hide.bs.offcanvas', () => {
@@ -56,117 +52,117 @@ offcanvasList.addEventListener('hidden.bs.offcanvas', e => {
 	wrapper.classList.remove('listTransitioning')
 	updateHovering(e)
 	applyView()
-	render()
 })
-
-closeObjectsListButton.addEventListener("click", clearObjectsList)
 
 bottomBar.addEventListener("mouseover", () => {
 	if (!fixed) clearObjectsList()
 })
 
 function clearObjectsList() {
-	closeObjectsListButton.classList.add("d-none")
-	objectsListOverflowNotice.classList.add("d-none")
-	entriesList.classList.remove("disableHover")
-	objectsContainer.replaceChildren()
 	fixed = false
-	render()
-	objectEditNav.remove()
 	document.title = pageTitle
+	entriesList.classList.remove("disableHover")
+	updateHash(false)
 }
 
 function toggleFixed(e, tapped) {
 	if (!fixed) {
 		entriesList.classList.remove("disableHover")
-		return 0
+		return
 	}
 	fixed = !fixed
 	if (!fixed) {
 		updateHovering(e, tapped)
-		render()
 	}
 	entriesList.classList.add("disableHover")
-	objectsListOverflowNotice.classList.add("d-none")
 }
 
 window.addEventListener("resize", () => {
-
 	applyView()
-	render()
 
 })
 
-function renderBackground() {
+function updateAtlas() {
+	resetEntriesList()
+}
 
-	backgroundContext.clearRect(0, 0, highlightCanvas.width, highlightCanvas.height)
+async function resetEntriesList() {
 
-	//backgroundCanvas.width = 1000 * zoom
-	//backgroundCanvas.height = 1000 * zoom
+	const variationConfig = variationsConfig[currentVariation]
 
-	//backgroundContext.lineWidth = zoom
-
-	backgroundContext.fillStyle = "rgba(0, 0, 0, 0.6)"
-	backgroundContext.fillRect(0, 0, backgroundCanvas.width, backgroundCanvas.height)
+	const entry = {
+		name: variationConfig.name,
+		links: {},
+		// id,
+		...variationConfig.info
+	}
+	const element = createInfoBlock(entry)
+	entriesList.replaceChildren(element)
 
 }
 
-async function render() {
+function updateCoordsDisplay(e) {
+	const pos = [
+		(e.clientX - (container.clientWidth / 2 - innerContainer.clientWidth / 2 + zoomOrigin[0] + container.offsetLeft)) / zoom + canvasOffset.x,
+		(e.clientY - (container.clientHeight / 2 - innerContainer.clientHeight / 2 + zoomOrigin[1] + container.offsetTop)) / zoom + canvasOffset.y
+	]
+	const coordsEl = document.getElementById("coords_p")
 
-	highlightContext.clearRect(0, 0, highlightCanvas.width, highlightCanvas.height)
+	// Displays coordinates as zero instead of NaN
+	if (isNaN(pos[0])) {
+		coordsEl.textContent = "0, 0"
+	} else {
+		coordsEl.textContent = Math.floor(pos[0]) + ", " + Math.floor(pos[1])
+	}
 
-	//canvas.width = 1000*zoom
-	//canvas.height = 1000*zoom
+	return pos
+}
 
-	highlightContext.globalCompositeOperation = "source-over"
-	highlightContext.clearRect(0, 0, highlightCanvas.width, highlightCanvas.height)
+function updateHovering(e, tapped) {
 
-
-	highlightContext.globalCompositeOperation = "source-out"
-	highlightContext.drawImage(backgroundCanvas, 0, 0)
+	if (dragging || (fixed && !tapped)) return
+	updateCoordsDisplay(e)
 
 }
 
-window.addEventListener("hashchange", highlightEntryFromUrl)
+window.addEventListener("hashchange", updateViewFromHash)
 
-function highlightEntryFromUrl() {
+async function updateViewFromHash() {
 
 	const hash = window.location.hash.substring(1); //Remove hash prefix
-	let [period] = hash.split('/')
+	let [hashPeriod, hashX, hashY, hashZoom] = hash.split('/')
 
 	let targetPeriod, targetVariation
 
-	if (period) {
-		[targetPeriod, , targetVariation] = parsePeriod(period)
+	if (hashPeriod) {
+		[targetPeriod, , targetVariation] = parsePeriod(hashPeriod)
 	} else {
 		targetPeriod = defaultPeriod
 		targetVariation = defaultVariation
 	}
-	updateTime(targetPeriod, targetVariation, true)
+	await updateTime(targetPeriod, targetVariation)
+
+	setView(
+		(isNaN(hashX) || hashX === '') ? undefined : Number(hashX), 
+		(isNaN(hashY) || hashY === '') ? undefined : Number(hashY), 
+		(isNaN(hashZoom) || hashZoom === '') ? undefined : Number(hashZoom)
+	)
 
 }
 
 function initExplore() {
+	updateAtlas()
+
+	document.addEventListener('timeupdate', () => {
+		updateAtlas()
+	})
 
 	window.updateHovering = updateHovering
-	window.render = () => { }
 
 	function updateHovering(e, tapped) {
 		if (dragging || (fixed && !tapped)) return
-		const pos = [
-			(e.clientX - (container.clientWidth / 2 - innerContainer.clientWidth / 2 + zoomOrigin[0] + container.offsetLeft)) / zoom,
-			(e.clientY - (container.clientHeight / 2 - innerContainer.clientHeight / 2 + zoomOrigin[1] + container.offsetTop)) / zoom
-		]
-		const coordsEl = document.getElementById("coords_p")
-		// Displays coordinates as zero instead of NaN
-		if (isNaN(pos[0])) {
-			coordsEl.textContent = "0, 0"
-		} else {
-			coordsEl.textContent = Math.ceil(pos[0]) + ", " + Math.ceil(pos[1])
-		}
+		updateCoordsDisplay(e)
 	}
-
-	renderBackground()
 
 	applyView()
 
@@ -184,10 +180,7 @@ function initGlobal() {
 	})
 
 	document.addEventListener('timeupdate', event => {
-		let hashData = window.location.hash.substring(1).split('/')
-		const newLocation = new URL(window.location)
-		newLocation.hash = formatHash(hashData[0], event.detail.period, event.detail.period, event.detail.variation)
-		if (location.hash !== newLocation.hash) history.replaceState({}, "", newLocation)
+		updateHash()
 	})
 }
 
@@ -217,22 +210,18 @@ function initViewGlobal() {
 	container.addEventListener("touchend", e => {
 		e.preventDefault()
 
-		//console.log(e)
-		//console.log(e.changedTouches[0].clientX)
 		if (e.changedTouches.length !== 1) return
 
 		e = e.changedTouches[0]
-		//console.log(lastPos[0] - e.clientX)
 
-		if (Math.abs(lastPos[0] - e.clientX) + Math.abs(lastPos[1] - e.clientY) > 4)
+		if (Math.sqrt(Math.pow(lastPos[0] - e.clientX, 2) + Math.pow(lastPos[1] - e.clientY, 2)) < 10)
+			setTimeout(() => updateHovering(e, true), 0)
 
-		//console.log("Foo!!")
 		dragging = false
 		fixed = false
-		setTimeout(() => updateHovering(e, true), 0)
 	})
 
 	if (window.location.hash) { // both "/" and just "/#" will be an empty hash string
-		highlightEntryFromUrl()
+		updateViewFromHash()
 	}
 }
