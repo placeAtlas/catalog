@@ -10,7 +10,7 @@
 
 This is a project to collect all canvas variations of Reddit's r/place April Fools event in 2022. These canvases are collected from various sources, primarily Reddit sources.
 
-This project is the derivation of [The r/place 2022 Atlas](https://place-atlas.stefanocoding.me/), which I contribute in part of. The codebase have been heavily modified and simplified for the use of this project. Source code are available with [the AGPL-3.0 license](https://github.com/Hans5958/place-catalog-2022/blob/master/LICENSE).
+This project is the derivation of [The r/place 2022 Atlas](https://2022.place-atlas.stefanocoding.me/), which I contribute in part of. The codebase have been heavily modified and simplified for the use of this project. Source code are available with [the AGPL-3.0 license](https://github.com/Hans5958/place-catalog-2022/blob/master/LICENSE).
 
 Credit to the [contributors of the Atlas](https://github.com/placeAtlas/atlas/contributors) for the original project, and for each of the authors of the variations (specific credits are available on the information tab).
 
