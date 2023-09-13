@@ -11,7 +11,7 @@ window.instanceId = instanceId
 const instanceSubreddit = "placeAtlas2"
 window.instanceSubreddit = instanceSubreddit
 
-const instanceRepo = "https://github.com/Hans5958/place-catalog"
+const instanceRepo = "https://github.com/Hans5958/place-catalog-2022"
 window.instanceRepo = instanceRepo
 
 const pageTitle = "The 2022 r/place Catalog"
@@ -672,7 +672,7 @@ console.info(`%cThe 2022 r/place Catalog
 %cCopyright (c) 2017 Roland Rytz <roland@draemm.li>
 Copyright (c) 2022 Place Atlas contributors
 Copyright (c) 2022 Hans5958
-Licensed under AGPL-3.0 (https://hans5958.github.io/place-catalog/license.txt)
+Licensed under AGPL-3.0 (https://hans5958.github.io/place-catalog-2022/license.txt)
 
 To get the image of the canvas, use downloadCanvas().
 `, 'font-size: 150%; line-height: 150%', '')
