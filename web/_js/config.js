@@ -2,7 +2,7 @@
 // Please also check code indicated with "@instanceonly" outside this file.
 // TODO: Avoid having instance-only code inside the main scripts to make updating easier.
 
-const prodDomain = "hans5958.github.io/place-catalog"
+const prodDomain = "hans5958.github.io/place-catalog-2022"
 window.prodDomain = prodDomain
 
 const instanceId = "pc"

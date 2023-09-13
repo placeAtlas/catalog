@@ -11,7 +11,7 @@ self.addEventListener("message", (event) => {
 workbox.routing.registerRoute(
     ({ url }) => {!url.pathname.startsWith('/_img/canvas/')},
     new workbox.strategies.NetworkFirst({
-        cacheName: "place-catalog-main",
+        cacheName: "place-catalog-2022-main",
         plugins: [
             new workbox.backgroundSync.BackgroundSyncPlugin(
                 "main-queue", {
@@ -25,7 +25,7 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
     ({ url }) => url.pathname.startsWith('/_img/canvas/'),
     new workbox.strategies.CacheFirst({
-        cacheName: "place-catalog-canvas",
+        cacheName: "place-catalog-2022-canvas",
         plugins: [
             new workbox.backgroundSync.BackgroundSyncPlugin(
                 "canvas-queue", {
